@@ -78,9 +78,9 @@ data "aws_iam_policy_document" "lambda_assume_role_policy_document" {
 
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role
 resource "aws_iam_role" "lambda_role" {
-  name                 = "${terraform.workspace}-lambda-role"
-  assume_role_policy   = data.aws_iam_policy_document.lambda_assume_role_policy_document.json
-  managed_policy_arns  = [
+  name               = "${terraform.workspace}-lambda-role"
+  assume_role_policy = data.aws_iam_policy_document.lambda_assume_role_policy_document.json
+  managed_policy_arns = [
     aws_iam_policy.lambda_role_permissions.arn,
   ]
 }
@@ -99,9 +99,9 @@ resource "aws_lambda_function" "lambda_function" {
   role          = aws_iam_role.lambda_role.arn
   environment {
     variables = {
-      CONSUMER_KEY = var.twitter_consumer_key,
-      CONSUMER_SECRET = var.twitter_consumer_secret,
-      ACCESS_TOKEN = var.twitter_access_token,
+      CONSUMER_KEY        = var.twitter_consumer_key,
+      CONSUMER_SECRET     = var.twitter_consumer_secret,
+      ACCESS_TOKEN        = var.twitter_access_token,
       ACCESS_TOKEN_SECRET = var.twitter_access_token_secret,
     }
   }
