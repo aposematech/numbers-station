@@ -35,7 +35,7 @@ def post_tweet(text):
 
 def handler(event, context):
     alphabet = string.ascii_uppercase
-    plain_text = get_alpha_only("Be sure to drink your Ovaltine!") # https://www.youtube.com/watch?v=6_XSShVAnkY
+    plain_text = get_alpha_only("Be sure to drink your Ovaltine!") # https://youtu.be/6_XSShVAnkY
     one_time_pad = get_one_time_pad(alphabet, plain_text)
     cipher_code = get_cipher_code(alphabet, plain_text, one_time_pad)
     cipher_code_blocks = get_code_blocks(cipher_code, 5)
