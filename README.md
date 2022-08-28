@@ -1,5 +1,7 @@
 # numbers-station
 
+![Screenshot](screenshot.png "Screenshot")
+
 ### Links
 
 - [Numbers station](https://en.wikipedia.org/wiki/Numbers_station)
