@@ -1,11 +1,11 @@
-variable "account_number" {
-  description = "AWS account number"
+variable "region" {
+  description = "AWS Region"
   type        = string
   default     = ""
 }
 
-variable "region" {
-  description = "AWS Region"
+variable "account_number" {
+  description = "AWS account number"
   type        = string
   default     = ""
 }
@@ -30,6 +30,12 @@ variable "twitter_access_token" {
 
 variable "twitter_access_token_secret" {
   description = "Twitter Access Token Secret"
+  type        = string
+  default     = ""
+}
+
+variable "cron" {
+  description = "Cron Expression"
   type        = string
   default     = ""
 }

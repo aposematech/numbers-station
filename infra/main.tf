@@ -110,7 +110,7 @@ resource "aws_lambda_function" "lambda_function" {
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudwatch_event_rule
 resource "aws_cloudwatch_event_rule" "cloudwatch_event_rule" {
   name                = terraform.workspace
-  schedule_expression = "cron(49 * * * ? *)"
+  schedule_expression = var.cron
 }
 
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudwatch_event_target
