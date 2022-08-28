@@ -1,5 +1,5 @@
 variable "region" {
-  description = "AWS Region"
+  description = "AWS region"
   type        = string
   default     = ""
 }
@@ -11,31 +11,31 @@ variable "account_number" {
 }
 
 variable "twitter_consumer_key" {
-  description = "Twitter Consumer Key"
+  description = "Twitter consumer key"
   type        = string
   default     = ""
 }
 
 variable "twitter_consumer_secret" {
-  description = "Twitter Consumer Secret"
+  description = "Twitter consumer secret"
   type        = string
   default     = ""
 }
 
 variable "twitter_access_token" {
-  description = "Twitter Access Token"
+  description = "Twitter access token"
   type        = string
   default     = ""
 }
 
 variable "twitter_access_token_secret" {
-  description = "Twitter Access Token Secret"
+  description = "Twitter access token secret"
   type        = string
   default     = ""
 }
 
 variable "cron" {
-  description = "Cron Expression"
+  description = "Cron expression"
   type        = string
   default     = ""
 }
