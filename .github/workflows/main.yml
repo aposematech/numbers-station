@@ -20,7 +20,7 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: ${{ secrets.AWS_REGION }}
     
-    - name: Amazon EC2 login
+    - name: Amazon ECR login
       uses: aws-actions/amazon-ecr-login@v1 # https://github.com/marketplace/actions/amazon-ecr-login-action-for-github-actions
     
     - name: Build, tag, and push docker image to Amazon ECR
