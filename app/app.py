@@ -39,7 +39,7 @@ def handler(event, context):
     one_time_pad = get_one_time_pad(alphabet, plain_text)
     cipher_code = get_cipher_code(alphabet, plain_text, one_time_pad)
     cipher_code_blocks = get_code_blocks(cipher_code, 5)
-    # post_tweet(cipher_code_blocks)
+    post_tweet(cipher_code_blocks)
     return { 
         "statusCode": 200,
         "headers": {
