@@ -16,7 +16,7 @@ def get_one_time_pad(alpha, text):
     return ''.join(system_random.choice(alpha) for i in range(len(text)))
 
 def get_cipher_code(alpha, text, key):
-    return ''.join(str(((ord(a))) - ((ord(b))) % len(alpha)).zfill(2) for a, b in zip(text, key))
+    return ''.join(str((ord(a) - ord(b)) % len(alpha)).zfill(2) for a, b in zip(text, key))
 
 def get_code_blocks(text, size):
     return ' '.join([text[i:i+size].ljust(size, '0') for i in range(0, len(text), size)])
@@ -39,7 +39,7 @@ def handler(event, context):
     one_time_pad = get_one_time_pad(alphabet, plain_text)
     cipher_code = get_cipher_code(alphabet, plain_text, one_time_pad)
     cipher_code_blocks = get_code_blocks(cipher_code, 5)
-    post_tweet(cipher_code_blocks)
+    # post_tweet(cipher_code_blocks)
     return { 
         "statusCode": 200,
         "headers": {
