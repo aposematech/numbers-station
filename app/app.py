@@ -6,7 +6,7 @@
 import os
 import random
 import string
-import tweepy
+import tweepy # https://docs.tweepy.org/en/stable/
 
 def get_alpha_only(text):
     return ''.join(filter(str.isalpha, text.upper()))
