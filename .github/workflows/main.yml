@@ -21,12 +21,12 @@ jobs:
         aws-region: ${{ secrets.AWS_REGION }}
     
     - name: Amazon ECR login
-      id: amazon-ecr-login
+      id: login-ecr
       uses: aws-actions/amazon-ecr-login@v1 # https://github.com/marketplace/actions/amazon-ecr-login-action-for-github-actions
     
     - name: Build, tag, and push Docker image to ECR
       env:
-        REGISTRY: ${{ steps.amazon-ecr-login.outputs.registry }}
+        REGISTRY: ${{ steps.login-ecr.outputs.registry }}
         REPOSITORY: ${{ github.event.repository.name }}
         IMAGE_TAG: latest
       run: |
