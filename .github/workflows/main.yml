@@ -1,4 +1,4 @@
-name: Build, tag, and push Docker image to ECR
+name: Build, tag, push, and deploy image
 
 on:
   push:
@@ -6,8 +6,8 @@ on:
     - main
 
 jobs:
-  build:
-    name: Build, tag, and push Docker image to ECR
+  deploy:
+    name: Build, tag, push, and deploy image
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
@@ -24,7 +24,7 @@ jobs:
       id: login-ecr
       uses: aws-actions/amazon-ecr-login@v1 # https://github.com/marketplace/actions/amazon-ecr-login-action-for-github-actions
     
-    - name: Build, tag, and push Docker image to ECR
+    - name: Build, tag, push, and deploy image
       env:
         REGISTRY: ${{ steps.login-ecr.outputs.registry }}
         REPOSITORY: ${{ github.event.repository.name }}
@@ -32,3 +32,4 @@ jobs:
       run: |
         docker build -t $REGISTRY/$REPOSITORY:$IMAGE_TAG .
         docker push $REGISTRY/$REPOSITORY:$IMAGE_TAG
+        aws lambda update-function-code --function-name $REPOSITORY --image-uri $REGISTRY/$REPOSITORY:$IMAGE_TAG
