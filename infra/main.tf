@@ -76,6 +76,15 @@ data "aws_iam_policy_document" "lambda_role_permissions_policy_document" {
       "arn:aws:logs:${var.region}:${var.account_number}:log-group:/aws/lambda/${terraform.workspace}:*",
     ]
   }
+  # statement {
+  #   effect = "Allow"
+  #   actions = [
+  #     "secretsmanager:GetSecretValue",
+  #   ]
+  #   resources = [
+  #     "*",
+  #   ]
+  # }
 }
 
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_policy
@@ -153,3 +162,41 @@ resource "aws_lambda_permission" "lambda_permission_allow_cloudwatch" {
   principal     = "events.amazonaws.com"
   source_arn    = aws_cloudwatch_event_rule.cloudwatch_event_rule.arn
 }
+
+# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/secretsmanager_secret
+resource "aws_secretsmanager_secret" "twitter_consumer_key" {
+  name = "twitter_consumer_key"
+}
+
+# resource "aws_secretsmanager_secret" "twitter_consumer_secret" {
+#   name = "twitter_consumer_secret"
+# }
+
+# resource "aws_secretsmanager_secret" "twitter_access_token" {
+#   name = "twitter_access_token"
+# }
+
+# resource "aws_secretsmanager_secret" "twitter_access_token_secret" {
+#   name = "twitter_access_token_secret"
+# }
+
+# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/secretsmanager_secret_version
+resource "aws_secretsmanager_secret_version" "twitter_consumer_key_version" {
+  secret_id     = aws_secretsmanager_secret.twitter_consumer_key.id
+  secret_string = var.twitter_consumer_key
+}
+
+# resource "aws_secretsmanager_secret_version" "twitter_consumer_secret_version" {
+#   secret_id     = aws_secretsmanager_secret.twitter_consumer_secret.id
+#   secret_string = var.twitter_consumer_secret
+# }
+
+# resource "aws_secretsmanager_secret_version" "twitter_access_token_version" {
+#   secret_id     = aws_secretsmanager_secret.twitter_access_token.id
+#   secret_string = var.twitter_access_token
+# }
+
+# resource "aws_secretsmanager_secret_version" "twitter_access_token_secret_version" {
+#   secret_id     = aws_secretsmanager_secret.twitter_access_token_secret.id
+#   secret_string = var.twitter_access_token_secret
+# }
