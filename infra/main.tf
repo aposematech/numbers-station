@@ -76,15 +76,16 @@ data "aws_iam_policy_document" "lambda_role_permissions_policy_document" {
       "arn:aws:logs:${var.region}:${var.account_number}:log-group:/aws/lambda/${terraform.workspace}:*",
     ]
   }
-  # statement {
-  #   effect = "Allow"
-  #   actions = [
-  #     "secretsmanager:GetSecretValue",
-  #   ]
-  #   resources = [
-  #     "*",
-  #   ]
-  # }
+  statement {
+    effect = "Allow"
+    actions = [
+      "secretsmanager:ListSecrets",
+      "secretsmanager:GetSecretValue",
+    ]
+    resources = [
+      "arn:aws:secretsmanager:${var.region}:${var.account_number}:secret:*",
+    ]
+  }
 }
 
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_policy
