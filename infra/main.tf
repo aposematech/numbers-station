@@ -121,6 +121,7 @@ resource "aws_lambda_function" "lambda_function" {
   package_type  = "Image"
   image_uri     = "${var.account_number}.dkr.ecr.${var.region}.amazonaws.com/${terraform.workspace}:latest"
   role          = aws_iam_role.lambda_role.arn
+  # TODO find a better way
   environment {
     variables = {
       CONSUMER_KEY        = var.twitter_consumer_key,
