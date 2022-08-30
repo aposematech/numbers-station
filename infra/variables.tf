@@ -37,5 +37,5 @@ variable "twitter_access_token_secret" {
 variable "cron" {
   description = "Cron expression"
   type        = string
-  default     = ""
+  default     = "cron(49 * * * ? *)"
 }
