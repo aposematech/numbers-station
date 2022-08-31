@@ -55,7 +55,8 @@ def handler(event, context):
         consumer_secret=twitter_consumer_secret, 
         access_token=twitter_access_token, 
         access_token_secret=twitter_access_token_secret)
-    client.create_tweet(text=cipher_code_blocks, media_ids=qr_code.media_id_string)
+    # client.create_tweet(text=cipher_code_blocks, media_ids=qr_code.media_id_string)
+    client.create_tweet(text=cipher_code_blocks)
     return { 
         "statusCode": 200,
         "headers": {
@@ -66,6 +67,7 @@ def handler(event, context):
             "plain_text": plain_text,
             "one_time_pad": one_time_pad,
             "cipher_code": cipher_code,
-            "cipher_code_blocks": cipher_code_blocks
+            "cipher_code_blocks": cipher_code_blocks,
+            "media_id": qr_code.media_id_string
         }
     }
