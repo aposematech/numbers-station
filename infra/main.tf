@@ -82,7 +82,10 @@ data "aws_iam_policy_document" "lambda_role_permissions_policy_document" {
       "secretsmanager:GetSecretValue",
     ]
     resources = [
-      "arn:aws:secretsmanager:${var.region}:${var.account_number}:secret:*",
+      "${aws_secretsmanager_secret.twitter_consumer_key.arn}",
+      "${aws_secretsmanager_secret.twitter_consumer_secret.arn}",
+      "${aws_secretsmanager_secret.twitter_access_token.arn}",
+      "${aws_secretsmanager_secret.twitter_access_token_secret.arn}",
     ]
   }
 }
