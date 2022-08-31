@@ -3,7 +3,6 @@
 # https://docs.aws.amazon.com/lambda/latest/dg/python-handler.html
 # https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html
 
-
 import random
 import string
 import tweepy # https://docs.tweepy.org/en/stable/
