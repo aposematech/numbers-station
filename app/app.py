@@ -25,13 +25,13 @@ def get_code_blocks(text, size):
     return ' '.join([text[i:i+size].ljust(size, '0') for i in range(0, len(text), size)])
 
 def handler(event, context):
-    # get code
+    # encrypt message
     alphabet = string.ascii_uppercase
     plain_text = get_alpha_only("Be sure to drink your Ovaltine!") # https://youtu.be/6_XSShVAnkY
     one_time_pad = get_one_time_pad(alphabet, plain_text)
     cipher_code = get_cipher_code(alphabet, plain_text, one_time_pad)
     cipher_code_blocks = get_code_blocks(cipher_code, 5)
-    # get qrcode
+    # generate qrcode
     cipher_qr_code_filename = "/tmp/cipher_qr_code.png"
     cipher_qr_code = qrcode.make(cipher_code_blocks)
     cipher_qr_code.save(cipher_qr_code_filename)
@@ -40,17 +40,16 @@ def handler(event, context):
     twitter_consumer_secret = parameters.get_secret("twitter_consumer_secret")
     twitter_access_token = parameters.get_secret("twitter_access_token")
     twitter_access_token_secret = parameters.get_secret("twitter_access_token_secret")
-    # get auth
+    # upload qrcode
     auth = tweepy.OAuth1UserHandler(
         twitter_consumer_key, 
         twitter_consumer_secret, 
         twitter_access_token, 
         twitter_access_token_secret)
     api = tweepy.API(auth)
-    # upload qrcode
     qr_code = api.media_upload(cipher_qr_code_filename)
     qr_code_media_ids = [qr_code.media_id_string]
-    # post code
+    # tweet ciphertext and qrcode
     client = tweepy.Client(
         consumer_key=twitter_consumer_key, 
         consumer_secret=twitter_consumer_secret, 
