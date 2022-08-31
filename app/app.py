@@ -30,11 +30,10 @@ def handler(event, context):
     alphabet = string.ascii_uppercase
     plain_text = get_alpha_only("Be sure to drink your Ovaltine!") # https://youtu.be/6_XSShVAnkY
     one_time_pad = get_one_time_pad(alphabet, plain_text)
-    cipher_text = get_cipher_text(alphabet, plain_text, one_time_pad)
-    cipher_text_blocks = get_cipher_text_blocks(cipher_text, 5)
+    cipher_text = get_cipher_text_blocks(get_cipher_text(alphabet, plain_text, one_time_pad), 5)
     # create qrcode
     cipher_text_qr_code_filename = "/tmp/cipher_text_qr_code.png"
-    cipher_text_qr_code = qrcode.make(cipher_text_blocks)
+    cipher_text_qr_code = qrcode.make(cipher_text)
     cipher_text_qr_code.save(cipher_text_qr_code_filename)
     # get secrets
     twitter_consumer_key = parameters.get_secret(os.environ['CONSUMER_KEY_NAME'])
@@ -56,7 +55,7 @@ def handler(event, context):
         consumer_secret=twitter_consumer_secret, 
         access_token=twitter_access_token, 
         access_token_secret=twitter_access_token_secret)
-    client.create_tweet(text=cipher_text_blocks, media_ids=cipher_text_qr_code_media_ids)
+    client.create_tweet(text=cipher_text, media_ids=cipher_text_qr_code_media_ids)
     return { 
         "statusCode": 200,
         "headers": {
@@ -66,7 +65,6 @@ def handler(event, context):
             "alphabet": alphabet,
             "plain_text": plain_text,
             "one_time_pad": one_time_pad,
-            "cipher_text": cipher_text,
-            "cipher_text_blocks": cipher_text_blocks
+            "cipher_text": cipher_text
         }
     }
