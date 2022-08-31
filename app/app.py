@@ -32,9 +32,9 @@ def handler(event, context):
     cipher_text = get_cipher_text(alphabet, plain_text, one_time_pad)
     cipher_text_blocks = get_cipher_text_blocks(cipher_text, 5)
     # generate qrcode
-    cipher_qr_code_filename = "/tmp/cipher_qr_code.png"
-    cipher_qr_code = qrcode.make(cipher_text_blocks)
-    cipher_qr_code.save(cipher_qr_code_filename)
+    cipher_text_qr_code_filename = "/tmp/cipher_text_qr_code.png"
+    cipher_text_qr_code = qrcode.make(cipher_text_blocks)
+    cipher_text_qr_code.save(cipher_text_qr_code_filename)
     # get secrets
     twitter_consumer_key = parameters.get_secret("twitter_consumer_key")
     twitter_consumer_secret = parameters.get_secret("twitter_consumer_secret")
@@ -47,15 +47,15 @@ def handler(event, context):
         twitter_access_token, 
         twitter_access_token_secret)
     api = tweepy.API(auth)
-    qr_code = api.media_upload(cipher_qr_code_filename)
-    qr_code_media_ids = [qr_code.media_id_string]
+    cipher_text_qr_code = api.media_upload(cipher_text_qr_code_filename)
+    cipher_text_qr_code_media_ids = [cipher_text_qr_code.media_id_string]
     # tweet ciphertext and qrcode
     client = tweepy.Client(
         consumer_key=twitter_consumer_key, 
         consumer_secret=twitter_consumer_secret, 
         access_token=twitter_access_token, 
         access_token_secret=twitter_access_token_secret)
-    client.create_tweet(text=cipher_text_blocks, media_ids=qr_code_media_ids)
+    client.create_tweet(text=cipher_text_blocks, media_ids=cipher_text_qr_code_media_ids)
     return { 
         "statusCode": 200,
         "headers": {
