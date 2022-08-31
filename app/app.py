@@ -3,6 +3,7 @@
 # https://docs.aws.amazon.com/lambda/latest/dg/python-handler.html
 # https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html
 
+
 import random
 import string
 import tweepy # https://docs.tweepy.org/en/stable/
@@ -35,7 +36,7 @@ def handler(event, context):
     twitter_consumer_secret = parameters.get_secret("twitter_consumer_secret")
     twitter_access_token = parameters.get_secret("twitter_access_token")
     twitter_access_token_secret = parameters.get_secret("twitter_access_token_secret")
-    # post tweet
+    # post code
     client = tweepy.Client(
         consumer_key=twitter_consumer_key, 
         consumer_secret=twitter_consumer_secret, 
