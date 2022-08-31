@@ -3,6 +3,7 @@
 # https://docs.aws.amazon.com/lambda/latest/dg/python-handler.html
 # https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html
 
+import os
 import qrcode # https://pypi.org/project/qrcode/
 import random
 import string
@@ -36,10 +37,10 @@ def handler(event, context):
     cipher_text_qr_code = qrcode.make(cipher_text_blocks)
     cipher_text_qr_code.save(cipher_text_qr_code_filename)
     # get secrets
-    twitter_consumer_key = parameters.get_secret("twitter_consumer_key")
-    twitter_consumer_secret = parameters.get_secret("twitter_consumer_secret")
-    twitter_access_token = parameters.get_secret("twitter_access_token")
-    twitter_access_token_secret = parameters.get_secret("twitter_access_token_secret")
+    twitter_consumer_key = parameters.get_secret(os.environ['CONSUMER_KEY_NAME'])
+    twitter_consumer_secret = parameters.get_secret(os.environ['CONSUMER_SECRET_NAME'])
+    twitter_access_token = parameters.get_secret(os.environ['ACCESS_TOKEN_NAME'])
+    twitter_access_token_secret = parameters.get_secret(os.environ['ACCESS_TOKEN_SECRET_NAME'])
     # upload qrcode
     auth = tweepy.OAuth1UserHandler(
         twitter_consumer_key, 

@@ -82,10 +82,10 @@ data "aws_iam_policy_document" "lambda_role_permissions_policy_document" {
       "secretsmanager:GetSecretValue",
     ]
     resources = [
-      "${aws_secretsmanager_secret.twitter_consumer_key.arn}",
-      "${aws_secretsmanager_secret.twitter_consumer_secret.arn}",
-      "${aws_secretsmanager_secret.twitter_access_token.arn}",
-      "${aws_secretsmanager_secret.twitter_access_token_secret.arn}",
+      aws_secretsmanager_secret.twitter_consumer_key.arn,
+      aws_secretsmanager_secret.twitter_consumer_secret.arn,
+      aws_secretsmanager_secret.twitter_access_token.arn,
+      aws_secretsmanager_secret.twitter_access_token_secret.arn,
     ]
   }
 }
@@ -133,6 +133,14 @@ resource "aws_lambda_function" "lambda_function" {
   package_type  = "Image"
   image_uri     = "${var.account_number}.dkr.ecr.${var.region}.amazonaws.com/${terraform.workspace}:latest"
   role          = aws_iam_role.lambda_role.arn
+  environment {
+    variables = {
+      CONSUMER_KEY_NAME        = aws_secretsmanager_secret.twitter_consumer_key.name,
+      CONSUMER_SECRET_NAME     = aws_secretsmanager_secret.twitter_consumer_secret.name,
+      ACCESS_TOKEN_NAME        = aws_secretsmanager_secret.twitter_access_token.name,
+      ACCESS_TOKEN_SECRET_NAME = aws_secretsmanager_secret.twitter_access_token_secret.name,
+    }
+  }
 }
 
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudwatch_event_rule
