@@ -49,14 +49,14 @@ def handler(event, context):
     api = tweepy.API(auth)
     # upload qrcode
     qr_code = api.media_upload(cipher_qr_code_filename)
+    qr_code_media_ids = [qr_code.media_id_string]
     # post code
     client = tweepy.Client(
         consumer_key=twitter_consumer_key, 
         consumer_secret=twitter_consumer_secret, 
         access_token=twitter_access_token, 
         access_token_secret=twitter_access_token_secret)
-    # client.create_tweet(text=cipher_code_blocks, media_ids=qr_code.media_id_string)
-    client.create_tweet(text=cipher_code_blocks)
+    client.create_tweet(text=cipher_code_blocks, media_ids=qr_code_media_ids)
     return { 
         "statusCode": 200,
         "headers": {
@@ -67,7 +67,6 @@ def handler(event, context):
             "plain_text": plain_text,
             "one_time_pad": one_time_pad,
             "cipher_code": cipher_code,
-            "cipher_code_blocks": cipher_code_blocks,
-            "media_id": qr_code.media_id_string
+            "cipher_code_blocks": cipher_code_blocks
         }
     }
