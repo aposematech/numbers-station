@@ -32,7 +32,7 @@ def handler(event, context):
     cipher_code = get_cipher_code(alphabet, plain_text, one_time_pad)
     cipher_code_blocks = get_code_blocks(cipher_code, 5)
     # get qrcode
-    cipher_qr_code_filename = "cipher_qr_code.png"
+    cipher_qr_code_filename = "/tmp/cipher_qr_code.png"
     cipher_qr_code = qrcode.make(cipher_code_blocks)
     cipher_qr_code.save(cipher_qr_code_filename)
     # get secrets
