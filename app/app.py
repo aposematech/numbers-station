@@ -18,22 +18,22 @@ def get_one_time_pad(alpha, text):
     system_random = random.SystemRandom()
     return ''.join(system_random.choice(alpha) for i in range(len(text)))
 
-def get_cipher_code(alpha, text, key):
+def get_cipher_text(alpha, text, key):
     return ''.join(str((ord(a) - ord(b)) % len(alpha)).zfill(2) for a, b in zip(text, key))
 
-def get_code_blocks(text, size):
+def get_cipher_text_blocks(text, size):
     return ' '.join([text[i:i+size].ljust(size, '0') for i in range(0, len(text), size)])
 
 def handler(event, context):
-    # encrypt message
+    # encrypt plaintext
     alphabet = string.ascii_uppercase
     plain_text = get_alpha_only("Be sure to drink your Ovaltine!") # https://youtu.be/6_XSShVAnkY
     one_time_pad = get_one_time_pad(alphabet, plain_text)
-    cipher_code = get_cipher_code(alphabet, plain_text, one_time_pad)
-    cipher_code_blocks = get_code_blocks(cipher_code, 5)
+    cipher_text = get_cipher_text(alphabet, plain_text, one_time_pad)
+    cipher_text_blocks = get_cipher_text_blocks(cipher_text, 5)
     # generate qrcode
     cipher_qr_code_filename = "/tmp/cipher_qr_code.png"
-    cipher_qr_code = qrcode.make(cipher_code_blocks)
+    cipher_qr_code = qrcode.make(cipher_text_blocks)
     cipher_qr_code.save(cipher_qr_code_filename)
     # get secrets
     twitter_consumer_key = parameters.get_secret("twitter_consumer_key")
@@ -55,7 +55,7 @@ def handler(event, context):
         consumer_secret=twitter_consumer_secret, 
         access_token=twitter_access_token, 
         access_token_secret=twitter_access_token_secret)
-    client.create_tweet(text=cipher_code_blocks, media_ids=qr_code_media_ids)
+    client.create_tweet(text=cipher_text_blocks, media_ids=qr_code_media_ids)
     return { 
         "statusCode": 200,
         "headers": {
@@ -65,7 +65,7 @@ def handler(event, context):
             "alphabet": alphabet,
             "plain_text": plain_text,
             "one_time_pad": one_time_pad,
-            "cipher_code": cipher_code,
-            "cipher_code_blocks": cipher_code_blocks
+            "cipher_text": cipher_text,
+            "cipher_text_blocks": cipher_text_blocks
         }
     }
