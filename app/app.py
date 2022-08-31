@@ -8,6 +8,9 @@ import random
 import string
 import tweepy # https://docs.tweepy.org/en/stable/
 
+# https://awslabs.github.io/aws-lambda-powertools-python/latest/
+from aws_lambda_powertools.utilities import parameters
+
 def get_alpha_only(text):
     return ''.join(filter(str.isalpha, text.upper()))
 
@@ -21,13 +24,13 @@ def get_cipher_code(alpha, text, key):
 def get_code_blocks(text, size):
     return ' '.join([text[i:i+size].ljust(size, '0') for i in range(0, len(text), size)])
 
-def post_tweet(text):
-    CONSUMER_KEY = os.environ['CONSUMER_KEY']
+def post_tweet(text, consumer_key):
+    # CONSUMER_KEY = os.environ['CONSUMER_KEY']
     CONSUMER_SECRET = os.environ['CONSUMER_SECRET']
     ACCESS_TOKEN = os.environ['ACCESS_TOKEN']
     ACCESS_TOKEN_SECRET = os.environ['ACCESS_TOKEN_SECRET']
     client = tweepy.Client(
-        consumer_key=CONSUMER_KEY, 
+        consumer_key=consumer_key, 
         consumer_secret=CONSUMER_SECRET, 
         access_token=ACCESS_TOKEN, 
         access_token_secret=ACCESS_TOKEN_SECRET)
@@ -39,7 +42,8 @@ def handler(event, context):
     one_time_pad = get_one_time_pad(alphabet, plain_text)
     cipher_code = get_cipher_code(alphabet, plain_text, one_time_pad)
     cipher_code_blocks = get_code_blocks(cipher_code, 5)
-    post_tweet(cipher_code_blocks)
+    twitter_consumer_key = parameters.get_secret("twitter_consumer_key")
+    post_tweet(cipher_code_blocks, twitter_consumer_key)
     return { 
         "statusCode": 200,
         "headers": {
