@@ -25,13 +25,17 @@ def get_cipher_text(alpha, text, key):
 def get_cipher_text_blocks(text, size):
     return ' '.join([text[i:i+size].ljust(size, '0') for i in range(0, len(text), size)])
 
-def handler(event, context):
-    # encrypt plaintext
+def encrypt_plain_text(text, size):
     alphabet = string.ascii_uppercase
-    plain_text = get_alpha_only("Be sure to drink your Ovaltine!") # https://youtu.be/6_XSShVAnkY
+    plain_text = get_alpha_only(text)
     one_time_pad = get_one_time_pad(alphabet, plain_text)
-    cipher_text = get_cipher_text(alphabet, plain_text, one_time_pad)
-    cipher_text_blocks = get_cipher_text_blocks(cipher_text, 5)
+    cipher_text = get_cipher_text_blocks(get_cipher_text(alphabet, plain_text, one_time_pad), size)
+    return cipher_text
+
+def handler(event, context):
+    plain_text = "Be sure to drink your Ovaltine!" # https://youtu.be/6_XSShVAnkY
+    block_size = 5
+    cipher_text = encrypt_plain_text(plain_text, block_size)
     # generate qrcode
     cipher_text_qr_code_filename = "/tmp/cipher_text_qr_code.png"
     cipher_text_qr_code = qrcode.make(cipher_text_blocks)
