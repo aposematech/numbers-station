@@ -10,6 +10,12 @@ variable "account_number" {
   default     = ""
 }
 
+variable "cron" {
+  description = "Cron expression"
+  type        = string
+  default     = "cron(49 * * * ? *)"
+}
+
 variable "twitter_consumer_key" {
   description = "Twitter consumer key"
   type        = string
@@ -32,10 +38,4 @@ variable "twitter_access_token_secret" {
   description = "Twitter access token secret"
   type        = string
   default     = ""
-}
-
-variable "cron" {
-  description = "Cron expression"
-  type        = string
-  default     = "cron(49 * * * ? *)"
 }
