@@ -24,16 +24,12 @@ def get_cipher_code(alpha, text, key):
 def get_code_blocks(text, size):
     return ' '.join([text[i:i+size].ljust(size, '0') for i in range(0, len(text), size)])
 
-def post_tweet(text, consumer_key):
-    # CONSUMER_KEY = os.environ['CONSUMER_KEY']
-    CONSUMER_SECRET = os.environ['CONSUMER_SECRET']
-    ACCESS_TOKEN = os.environ['ACCESS_TOKEN']
-    ACCESS_TOKEN_SECRET = os.environ['ACCESS_TOKEN_SECRET']
+def post_tweet(text, consumer_key, consumer_secret, access_token, access_token_secret):
     client = tweepy.Client(
         consumer_key=consumer_key, 
-        consumer_secret=CONSUMER_SECRET, 
-        access_token=ACCESS_TOKEN, 
-        access_token_secret=ACCESS_TOKEN_SECRET)
+        consumer_secret=consumer_secret, 
+        access_token=access_token, 
+        access_token_secret=access_token_secret)
     client.create_tweet(text=text)
 
 def handler(event, context):
@@ -43,7 +39,10 @@ def handler(event, context):
     cipher_code = get_cipher_code(alphabet, plain_text, one_time_pad)
     cipher_code_blocks = get_code_blocks(cipher_code, 5)
     twitter_consumer_key = parameters.get_secret("twitter_consumer_key")
-    post_tweet(cipher_code_blocks, twitter_consumer_key)
+    twitter_consumer_secret = parameters.get_secret("twitter_consumer_secret")
+    twitter_access_token = parameters.get_secret("twitter_access_token")
+    twitter_access_token_secret = parameters.get_secret("twitter_access_token_secret")
+    post_tweet(cipher_code_blocks, twitter_consumer_key, twitter_consumer_secret, twitter_access_token, twitter_access_token_secret)
     return { 
         "statusCode": 200,
         "headers": {
