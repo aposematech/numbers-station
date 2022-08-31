@@ -32,7 +32,7 @@ def handler(event, context):
     one_time_pad = get_one_time_pad(alphabet, plain_text)
     cipher_text = get_cipher_text(alphabet, plain_text, one_time_pad)
     cipher_text_blocks = get_cipher_text_blocks(cipher_text, 5)
-    # generate qrcode
+    # create qrcode
     cipher_text_qr_code_filename = "/tmp/cipher_text_qr_code.png"
     cipher_text_qr_code = qrcode.make(cipher_text_blocks)
     cipher_text_qr_code.save(cipher_text_qr_code_filename)
