@@ -39,3 +39,27 @@ variable "twitter_access_token_secret" {
   type        = string
   default     = ""
 }
+
+variable "repo_name" {
+  description = "Repository name"
+  type        = string
+  default     = "numbers-station"
+}
+
+variable "repo_description" {
+  description = "Repository description"
+  type        = string
+  default     = "Twitter bot demo"
+}
+
+variable "repo_homepage_url" {
+  description = "Repository homepage URL"
+  type        = string
+  default     = "https://twitter.com/CharlieSierra49"
+}
+
+variable "repo_visibility" {
+  description = "Repository visibility"
+  type        = string
+  default     = "public"
+}
