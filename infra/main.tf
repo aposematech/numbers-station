@@ -47,7 +47,7 @@ resource "aws_ecr_repository" "ecr_repo" {
 }
 
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ecr_lifecycle_policy
-resource "aws_ecr_lifecycle_policy" "repository_lifecycle_policy" {
+resource "aws_ecr_lifecycle_policy" "ecr_repo_lifecycle_policy" {
   repository = aws_ecr_repository.ecr_repo.name
   policy     = <<EOF
 {
