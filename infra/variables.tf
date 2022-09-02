@@ -24,12 +24,6 @@ variable "aws_account_number" {
   default     = ""
 }
 
-variable "cron" {
-  description = "Cron expression"
-  type        = string
-  default     = "cron(49 * * * ? *)"
-}
-
 variable "twitter_consumer_key" {
   description = "Twitter consumer key"
   type        = string
