@@ -1,23 +1,17 @@
-variable "repo_name" {
-  description = "Repository name"
-  type        = string
-  default     = "numbers-station"
-}
-
 variable "repo_description" {
-  description = "Repository description"
+  description = "Repo description"
   type        = string
   default     = "Twitter bot demo"
 }
 
 variable "repo_homepage_url" {
-  description = "Repository homepage URL"
+  description = "Repo homepage URL"
   type        = string
   default     = "https://twitter.com/CharlieSierra49"
 }
 
 variable "repo_visibility" {
-  description = "Repository visibility"
+  description = "Repo visibility"
   type        = string
   default     = "public"
 }
