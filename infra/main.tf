@@ -43,6 +43,18 @@ module "image_repo" {
   source = "./modules/image-repo"
 }
 
+module "function_secrets" {
+  source                           = "./modules/function-secrets"
+  twitter_consumer_key_name        = "twitter_consumer_key"
+  twitter_consumer_key             = var.twitter_consumer_key
+  twitter_consumer_secret_name     = "twitter_consumer_secret"
+  twitter_consumer_secret          = var.twitter_consumer_secret
+  twitter_access_token_name        = "twitter_access_token"
+  twitter_access_token             = var.twitter_access_token
+  twitter_access_token_secret_name = "twitter_access_token_secret"
+  twitter_access_token_secret      = var.twitter_access_token_secret
+}
+
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document
 data "aws_iam_policy_document" "lambda_role_permissions_policy_document" {
   statement {
@@ -70,10 +82,10 @@ data "aws_iam_policy_document" "lambda_role_permissions_policy_document" {
       "secretsmanager:GetSecretValue",
     ]
     resources = [
-      aws_secretsmanager_secret.twitter_consumer_key.arn,
-      aws_secretsmanager_secret.twitter_consumer_secret.arn,
-      aws_secretsmanager_secret.twitter_access_token.arn,
-      aws_secretsmanager_secret.twitter_access_token_secret.arn,
+      module.function_secrets.twitter_consumer_key_arn,
+      module.function_secrets.twitter_consumer_secret_arn,
+      module.function_secrets.twitter_access_token_arn,
+      module.function_secrets.twitter_access_token_secret_arn,
     ]
   }
 }
@@ -123,10 +135,10 @@ resource "aws_lambda_function" "lambda_function" {
   role          = aws_iam_role.lambda_role.arn
   environment {
     variables = {
-      CONSUMER_KEY_NAME        = aws_secretsmanager_secret.twitter_consumer_key.name,
-      CONSUMER_SECRET_NAME     = aws_secretsmanager_secret.twitter_consumer_secret.name,
-      ACCESS_TOKEN_NAME        = aws_secretsmanager_secret.twitter_access_token.name,
-      ACCESS_TOKEN_SECRET_NAME = aws_secretsmanager_secret.twitter_access_token_secret.name,
+      CONSUMER_KEY_NAME        = module.function_secrets.twitter_consumer_key_name,
+      CONSUMER_SECRET_NAME     = module.function_secrets.twitter_consumer_secret_name,
+      ACCESS_TOKEN_NAME        = module.function_secrets.twitter_access_token_name,
+      ACCESS_TOKEN_SECRET_NAME = module.function_secrets.twitter_access_token_secret_name,
     }
   }
 }
@@ -151,42 +163,4 @@ resource "aws_lambda_permission" "lambda_permission_allow_cloudwatch" {
   function_name = aws_lambda_function.lambda_function.function_name
   principal     = "events.amazonaws.com"
   source_arn    = aws_cloudwatch_event_rule.cloudwatch_event_rule.arn
-}
-
-# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/secretsmanager_secret
-resource "aws_secretsmanager_secret" "twitter_consumer_key" {
-  name = "twitter_consumer_key"
-}
-
-resource "aws_secretsmanager_secret" "twitter_consumer_secret" {
-  name = "twitter_consumer_secret"
-}
-
-resource "aws_secretsmanager_secret" "twitter_access_token" {
-  name = "twitter_access_token"
-}
-
-resource "aws_secretsmanager_secret" "twitter_access_token_secret" {
-  name = "twitter_access_token_secret"
-}
-
-# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/secretsmanager_secret_version
-resource "aws_secretsmanager_secret_version" "twitter_consumer_key_version" {
-  secret_id     = aws_secretsmanager_secret.twitter_consumer_key.id
-  secret_string = var.twitter_consumer_key
-}
-
-resource "aws_secretsmanager_secret_version" "twitter_consumer_secret_version" {
-  secret_id     = aws_secretsmanager_secret.twitter_consumer_secret.id
-  secret_string = var.twitter_consumer_secret
-}
-
-resource "aws_secretsmanager_secret_version" "twitter_access_token_version" {
-  secret_id     = aws_secretsmanager_secret.twitter_access_token.id
-  secret_string = var.twitter_access_token
-}
-
-resource "aws_secretsmanager_secret_version" "twitter_access_token_secret_version" {
-  secret_id     = aws_secretsmanager_secret.twitter_access_token_secret.id
-  secret_string = var.twitter_access_token_secret
 }
