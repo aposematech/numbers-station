@@ -25,15 +25,15 @@ provider "github" {}
 
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs
 provider "aws" {
-  region = var.region
+  region = var.aws_region
 }
 
 # https://registry.terraform.io/providers/integrations/github/latest/docs/resources/repository
 resource "github_repository" "git_repo" {
   name         = terraform.workspace
-  description  = var.repo_description
-  homepage_url = var.repo_homepage_url
-  visibility   = var.repo_visibility
+  description  = var.git_repo_description
+  homepage_url = var.git_repo_homepage_url
+  visibility   = var.git_repo_visibility
 }
 
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ecr_repository
@@ -78,7 +78,7 @@ data "aws_iam_policy_document" "lambda_role_permissions_policy_document" {
       "logs:CreateLogGroup",
     ]
     resources = [
-      "arn:aws:logs:${var.region}:${var.account_number}:*",
+      "arn:aws:logs:${var.aws_region}:${var.aws_account_number}:*",
     ]
   }
   statement {
@@ -88,7 +88,7 @@ data "aws_iam_policy_document" "lambda_role_permissions_policy_document" {
       "logs:PutLogEvents",
     ]
     resources = [
-      "arn:aws:logs:${var.region}:${var.account_number}:log-group:/aws/lambda/${terraform.workspace}:*",
+      "arn:aws:logs:${var.aws_region}:${var.aws_account_number}:log-group:/aws/lambda/${terraform.workspace}:*",
     ]
   }
   statement {
@@ -146,7 +146,7 @@ resource "aws_iam_role_policy_attachment" "lambda_role_policy_attachment" {
 resource "aws_lambda_function" "lambda_function" {
   function_name = terraform.workspace
   package_type  = "Image"
-  image_uri     = "${var.account_number}.dkr.ecr.${var.region}.amazonaws.com/${terraform.workspace}:latest"
+  image_uri     = "${var.aws_account_number}.dkr.ecr.${var.aws_region}.amazonaws.com/${terraform.workspace}:latest"
   role          = aws_iam_role.lambda_role.arn
   environment {
     variables = {

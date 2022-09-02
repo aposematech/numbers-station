@@ -1,28 +1,28 @@
-variable "repo_description" {
+variable "git_repo_description" {
   description = "Repo description"
   type        = string
   default     = "Twitter bot demo"
 }
 
-variable "repo_homepage_url" {
+variable "git_repo_homepage_url" {
   description = "Repo homepage URL"
   type        = string
   default     = "https://twitter.com/CharlieSierra49"
 }
 
-variable "repo_visibility" {
+variable "git_repo_visibility" {
   description = "Repo visibility"
   type        = string
   default     = "public"
 }
 
-variable "region" {
+variable "aws_region" {
   description = "AWS region"
   type        = string
   default     = "us-east-1"
 }
 
-variable "account_number" {
+variable "aws_account_number" {
   description = "AWS account number"
   type        = string
   default     = ""
