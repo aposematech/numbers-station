@@ -36,6 +36,22 @@ resource "github_repository" "git_repo" {
   visibility   = var.git_repo_visibility
 }
 
+data "github_actions_public_key" "git_repo_public_key" {
+  repository = terraform.workspace
+}
+
+resource "github_actions_secret" "git_secret_aws_access_key_id" {
+  repository      = terraform.workspace
+  secret_name     = var.git_secret_name_aws_access_key_id
+  plaintext_value = var.git_secret_aws_access_key_id
+}
+
+resource "github_actions_secret" "git_secret_aws_access_key" {
+  repository      = terraform.workspace
+  secret_name     = var.git_secret_name_aws_access_key
+  plaintext_value = var.git_secret_aws_access_key
+}
+
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ecr_repository
 resource "aws_ecr_repository" "ecr_repo" {
   name                 = terraform.workspace
