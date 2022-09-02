@@ -1,38 +1,8 @@
-variable "git_repo_description" {
-  description = "Repo description"
-  type        = string
-  default     = "Twitter bot demo"
-}
-
-variable "git_repo_homepage_url" {
-  description = "Repo homepage URL"
-  type        = string
-  default     = "https://twitter.com/CharlieSierra49"
-}
-
-variable "git_repo_visibility" {
-  description = "Repo visibility"
-  type        = string
-  default     = "public"
-}
-
-variable "git_secret_name_aws_access_key_id" {
-  description = "GitHub Actions secret name: AWS access key id"
-  type        = string
-  default     = "AWS_ACCESS_KEY_ID"
-}
-
 variable "git_secret_aws_access_key_id" {
   description = "GitHub Actions secret: AWS access key id"
   type        = string
   default     = ""
   sensitive   = true
-}
-
-variable "git_secret_name_aws_access_key" {
-  description = "GitHub Actions secret name: AWS access key"
-  type        = string
-  default     = "AWS_SECRET_ACCESS_KEY"
 }
 
 variable "git_secret_aws_access_key" {

@@ -28,29 +28,15 @@ provider "aws" {
   region = var.aws_region
 }
 
-# https://registry.terraform.io/providers/integrations/github/latest/docs/resources/repository
-resource "github_repository" "git_repo" {
-  name         = terraform.workspace
-  description  = var.git_repo_description
-  homepage_url = var.git_repo_homepage_url
-  visibility   = var.git_repo_visibility
-}
-
-# https://registry.terraform.io/providers/integrations/github/latest/docs/resources/actions_secret
-data "github_actions_public_key" "git_repo_public_key" {
-  repository = terraform.workspace
-}
-
-resource "github_actions_secret" "git_secret_aws_access_key_id" {
-  repository      = terraform.workspace
-  secret_name     = var.git_secret_name_aws_access_key_id
-  plaintext_value = var.git_secret_aws_access_key_id
-}
-
-resource "github_actions_secret" "git_secret_aws_access_key" {
-  repository      = terraform.workspace
-  secret_name     = var.git_secret_name_aws_access_key
-  plaintext_value = var.git_secret_aws_access_key
+module "git_repo" {
+  source                            = "./modules/git-repo"
+  git_repo_description              = "Twitter bot demo"
+  git_repo_homepage_url             = "https://twitter.com/CharlieSierra49"
+  git_repo_visibility               = "public"
+  git_secret_name_aws_access_key_id = "AWS_ACCESS_KEY_ID"
+  git_secret_aws_access_key_id      = var.git_secret_aws_access_key_id
+  git_secret_name_aws_access_key    = "AWS_SECRET_ACCESS_KEY"
+  git_secret_aws_access_key         = var.git_secret_aws_access_key
 }
 
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ecr_repository
