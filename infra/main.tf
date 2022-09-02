@@ -36,6 +36,7 @@ resource "github_repository" "git_repo" {
   visibility   = var.git_repo_visibility
 }
 
+# https://registry.terraform.io/providers/integrations/github/latest/docs/resources/actions_secret
 data "github_actions_public_key" "git_repo_public_key" {
   repository = terraform.workspace
 }
