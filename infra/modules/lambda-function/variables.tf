@@ -1,65 +1,65 @@
 variable "aws_region" {
-  description = "AWS region"
+  description = "AWS Region"
   type        = string
   default     = ""
 }
 
 variable "aws_account_number" {
-  description = "AWS account number"
+  description = "AWS Account Number"
   type        = string
   default     = ""
 }
 
 variable "cron" {
-  description = "Cron expression"
+  description = "Cron Expression"
   type        = string
   default     = ""
 }
 
 variable "twitter_consumer_key_name" {
-  description = "Twitter consumer key name"
+  description = "Twitter Consumer Key - AWS Secret Name"
   type        = string
   default     = ""
 }
 
 variable "twitter_consumer_key_arn" {
-  description = "Twitter consumer key arn"
+  description = "Twitter Consumer Key - AWS Secret ARN"
   type        = string
   default     = ""
 }
 
 variable "twitter_consumer_secret_name" {
-  description = "Twitter consumer secret name"
+  description = "Twitter Consumer Secret - AWS Secret Name"
   type        = string
   default     = ""
 }
 
 variable "twitter_consumer_secret_arn" {
-  description = "Twitter consumer secret arn"
+  description = "Twitter Consumer Secret - AWS Secret ARN"
   type        = string
   default     = ""
 }
 
 variable "twitter_access_token_name" {
-  description = "Twitter access token name"
+  description = "Twitter Access Token - AWS Secret Name"
   type        = string
   default     = ""
 }
 
 variable "twitter_access_token_arn" {
-  description = "Twitter access token arn"
+  description = "Twitter Access Token - AWS Secret ARN"
   type        = string
   default     = ""
 }
 
 variable "twitter_access_token_secret_name" {
-  description = "Twitter access token secret name"
+  description = "Twitter Access Token Secret - AWS Secret Name"
   type        = string
   default     = ""
 }
 
 variable "twitter_access_token_secret_arn" {
-  description = "Twitter access token secret arn"
+  description = "Twitter Access Token Secret - AWS Secret ARN"
   type        = string
   default     = ""
 }

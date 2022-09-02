@@ -29,14 +29,14 @@ provider "aws" {
 }
 
 module "git_repo" {
-  source                            = "./modules/git-repo"
-  git_repo_description              = "Twitter bot demo"
-  git_repo_homepage_url             = "https://twitter.com/CharlieSierra49"
-  git_repo_visibility               = "public"
-  git_secret_name_aws_access_key_id = "AWS_ACCESS_KEY_ID"
-  git_secret_aws_access_key_id      = var.git_secret_aws_access_key_id
-  git_secret_name_aws_access_key    = "AWS_SECRET_ACCESS_KEY"
-  git_secret_aws_access_key         = var.git_secret_aws_access_key
+  source                  = "./modules/git-repo"
+  git_repo_description    = "Twitter bot demo"
+  git_repo_homepage_url   = "https://twitter.com/CharlieSierra49"
+  git_repo_visibility     = "public"
+  aws_access_key_id_name  = "AWS_ACCESS_KEY_ID"
+  aws_access_key_id_value = var.aws_access_key_id
+  aws_access_key_name     = "AWS_SECRET_ACCESS_KEY"
+  aws_access_key_value    = var.aws_access_key
 }
 
 module "image_repo" {
@@ -44,15 +44,15 @@ module "image_repo" {
 }
 
 module "function_secrets" {
-  source                           = "./modules/function-secrets"
-  twitter_consumer_key_name        = "TWITTER_CONSUMER_KEY"
-  twitter_consumer_key             = var.twitter_consumer_key
-  twitter_consumer_secret_name     = "TWITTER_CONSUMER_SECRET"
-  twitter_consumer_secret          = var.twitter_consumer_secret
-  twitter_access_token_name        = "TWITTER_ACCESS_TOKEN"
-  twitter_access_token             = var.twitter_access_token
-  twitter_access_token_secret_name = "TWITTER_ACCESS_TOKEN_SECRET"
-  twitter_access_token_secret      = var.twitter_access_token_secret
+  source                            = "./modules/function-secrets"
+  twitter_consumer_key_name         = "TWITTER_CONSUMER_KEY"
+  twitter_consumer_key_value        = var.twitter_consumer_key
+  twitter_consumer_secret_name      = "TWITTER_CONSUMER_SECRET"
+  twitter_consumer_secret_value     = var.twitter_consumer_secret
+  twitter_access_token_name         = "TWITTER_ACCESS_TOKEN"
+  twitter_access_token_value        = var.twitter_access_token
+  twitter_access_token_secret_name  = "TWITTER_ACCESS_TOKEN_SECRET"
+  twitter_access_token_secret_value = var.twitter_access_token_secret
 }
 
 module "lambda_function" {

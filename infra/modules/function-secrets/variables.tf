@@ -1,50 +1,50 @@
 variable "twitter_consumer_key_name" {
-  description = "Twitter consumer key name"
+  description = "Twitter Consumer Key - AWS Secret Name"
   type        = string
   default     = ""
 }
 
-variable "twitter_consumer_key" {
-  description = "Twitter consumer key"
+variable "twitter_consumer_key_value" {
+  description = "Twitter Consumer Key - AWS Secret Value"
   type        = string
   default     = ""
   sensitive   = true
 }
 
 variable "twitter_consumer_secret_name" {
-  description = "Twitter consumer secret name"
+  description = "Twitter Consumer Secret - AWS Secret Name"
   type        = string
   default     = ""
 }
 
-variable "twitter_consumer_secret" {
-  description = "Twitter consumer secret"
+variable "twitter_consumer_secret_value" {
+  description = "Twitter Consumer Secret - AWS Secret Value"
   type        = string
   default     = ""
   sensitive   = true
 }
 
 variable "twitter_access_token_name" {
-  description = "Twitter access token name"
+  description = "Twitter Access Token - AWS Secret Name"
   type        = string
   default     = ""
 }
 
-variable "twitter_access_token" {
-  description = "Twitter access token"
+variable "twitter_access_token_value" {
+  description = "Twitter Access Token - AWS Secret Value"
   type        = string
   default     = ""
   sensitive   = true
 }
 
 variable "twitter_access_token_secret_name" {
-  description = "Twitter access token secret name"
+  description = "Twitter Access Token Secret - AWS Secret Name"
   type        = string
   default     = ""
 }
 
-variable "twitter_access_token_secret" {
-  description = "Twitter access token secret"
+variable "twitter_access_token_secret_value" {
+  description = "Twitter Access Token Secret AWS Secret Value"
   type        = string
   default     = ""
   sensitive   = true
