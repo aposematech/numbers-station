@@ -45,13 +45,13 @@ module "image_repo" {
 
 module "function_secrets" {
   source                           = "./modules/function-secrets"
-  twitter_consumer_key_name        = "twitter_consumer_key"
+  twitter_consumer_key_name        = "TWITTER_CONSUMER_KEY"
   twitter_consumer_key             = var.twitter_consumer_key
-  twitter_consumer_secret_name     = "twitter_consumer_secret"
+  twitter_consumer_secret_name     = "TWITTER_CONSUMER_SECRET"
   twitter_consumer_secret          = var.twitter_consumer_secret
-  twitter_access_token_name        = "twitter_access_token"
+  twitter_access_token_name        = "TWITTER_ACCESS_TOKEN"
   twitter_access_token             = var.twitter_access_token
-  twitter_access_token_secret_name = "twitter_access_token_secret"
+  twitter_access_token_secret_name = "TWITTER_ACCESS_TOKEN_SECRET"
   twitter_access_token_secret      = var.twitter_access_token_secret
 }
 
