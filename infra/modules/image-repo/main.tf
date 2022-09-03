@@ -1,3 +1,13 @@
+terraform {
+  # https://www.terraform.io/language/providers/requirements
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 4.28.0"
+    }
+  }
+}
+
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ecr_repository
 resource "aws_ecr_repository" "ecr_repo" {
   name                 = terraform.workspace

@@ -1,3 +1,13 @@
+terraform {
+  # https://www.terraform.io/language/providers/requirements
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 4.28.0"
+    }
+  }
+}
+
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/secretsmanager_secret
 resource "aws_secretsmanager_secret" "twitter_consumer_key" {
   name = var.twitter_consumer_key_name
