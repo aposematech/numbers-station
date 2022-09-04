@@ -17,6 +17,10 @@ terraform {
       source  = "hashicorp/aws"
       version = "~> 4.28.0"
     }
+    betteruptime = {
+      source  = "BetterStackHQ/better-uptime"
+      version = "~> 0.3.0"
+    }
   }
 }
 
@@ -28,10 +32,15 @@ provider "aws" {
   region = var.aws_region
 }
 
+# https://registry.terraform.io/providers/BetterStackHQ/better-uptime/latest/docs
+provider "betteruptime" {
+  api_token = var.betteruptime_api_token
+}
+
 module "git_repo" {
   source                  = "./modules/git-repo"
   git_repo_description    = "Twitter bot demo"
-  git_repo_homepage_url   = "https://twitter.com/CharlieSierra49"
+  git_repo_homepage_url   = var.twitter_url
   git_repo_visibility     = "public"
   aws_access_key_id_name  = "AWS_ACCESS_KEY_ID"
   aws_access_key_id_value = var.aws_access_key_id
@@ -72,4 +81,11 @@ module "lambda_function" {
   twitter_access_token_arn         = module.function_secrets.twitter_access_token_arn
   twitter_access_token_secret_name = module.function_secrets.twitter_access_token_secret_name
   twitter_access_token_secret_arn  = module.function_secrets.twitter_access_token_secret_arn
+  heartbeat_monitor_url            = module.function_monitors.heartbeat_monitor_url
+}
+
+module "function_monitors" {
+  source                 = "./modules/function-monitors"
+  betteruptime_subdomain = "charliesierra49"
+  twitter_url            = var.twitter_url
 }

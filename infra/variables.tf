@@ -31,6 +31,12 @@ variable "secret_transmission" {
   sensitive   = true
 }
 
+variable "twitter_url" {
+  description = "Twitter URL"
+  type        = string
+  default     = "https://twitter.com/CharlieSierra49"
+}
+
 variable "twitter_consumer_key" {
   description = "Twitter Consumer Key - AWS Secret"
   type        = string
@@ -54,6 +60,13 @@ variable "twitter_access_token" {
 
 variable "twitter_access_token_secret" {
   description = "Twitter Access Token Secret - AWS Secret"
+  type        = string
+  default     = ""
+  sensitive   = true
+}
+
+variable "betteruptime_api_token" {
+  description = "Better Uptime API Token"
   type        = string
   default     = ""
   sensitive   = true

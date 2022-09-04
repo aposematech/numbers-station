@@ -94,6 +94,7 @@ resource "aws_lambda_function" "lambda_function" {
       TWITTER_CONSUMER_SECRET_NAME     = var.twitter_consumer_secret_name,
       TWITTER_ACCESS_TOKEN_NAME        = var.twitter_access_token_name,
       TWITTER_ACCESS_TOKEN_SECRET_NAME = var.twitter_access_token_secret_name,
+      HEARTBEAT_MONITOR_URL            = var.heartbeat_monitor_url
     }
   }
 }

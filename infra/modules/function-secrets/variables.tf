@@ -8,7 +8,7 @@ variable "secret_transmission_value" {
   description = "Secret Transmission - AWS Secret Value"
   type        = string
   default     = ""
-  sensitive = true
+  sensitive   = true
 }
 
 variable "twitter_consumer_key_name" {
