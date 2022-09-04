@@ -28,7 +28,7 @@ def get_cipher_text_blocks(text, size):
 def handler(event, context):
     # encrypt plaintext
     alphabet = string.ascii_uppercase
-    plain_text = get_alpha_only("Be sure to drink your Ovaltine!") # https://youtu.be/6_XSShVAnkY
+    plain_text = parameters.get_secret(os.environ['SECRET_TRANSMISSION_NAME'])
     one_time_pad = get_one_time_pad(alphabet, plain_text)
     cipher_text = get_cipher_text_blocks(get_cipher_text(alphabet, plain_text, one_time_pad), 5)
     # create qrcode
