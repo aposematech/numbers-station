@@ -1,3 +1,15 @@
+variable "secret_transmission_name" {
+  description = "Secret Transmission - AWS Secret Name"
+  type        = string
+  default     = ""
+}
+
+variable "secret_transmission_value" {
+  description = "Secret Transmission - AWS Secret Value"
+  type        = string
+  default     = ""
+}
+
 variable "twitter_consumer_key_name" {
   description = "Twitter Consumer Key - AWS Secret Name"
   type        = string

@@ -24,6 +24,13 @@ variable "aws_account_number" {
   default     = ""
 }
 
+variable "secret_transmission" {
+  description = "Secret Transmission - AWS Secret"
+  type        = string
+  default     = ""
+  sensitive   = true
+}
+
 variable "twitter_consumer_key" {
   description = "Twitter Consumer Key - AWS Secret"
   type        = string

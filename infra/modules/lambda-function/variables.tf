@@ -16,6 +16,18 @@ variable "cron" {
   default     = ""
 }
 
+variable "secret_transmission_name" {
+  description = "Secret Transmission - AWS Secret Name"
+  type        = string
+  default     = ""
+}
+
+variable "secret_transmission_arn" {
+  description = "Secret Transmission - AWS Secret ARN"
+  type        = string
+  default     = ""
+}
+
 variable "twitter_consumer_key_name" {
   description = "Twitter Consumer Key - AWS Secret Name"
   type        = string

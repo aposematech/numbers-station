@@ -45,6 +45,8 @@ module "image_repo" {
 
 module "function_secrets" {
   source                            = "./modules/function-secrets"
+  secret_transmission_name          = "SECRET_TRANSMISSION"
+  secret_transmission_value         = var.secret_transmission
   twitter_consumer_key_name         = "TWITTER_CONSUMER_KEY"
   twitter_consumer_key_value        = var.twitter_consumer_key
   twitter_consumer_secret_name      = "TWITTER_CONSUMER_SECRET"
@@ -60,6 +62,8 @@ module "lambda_function" {
   aws_region                       = var.aws_region
   aws_account_number               = var.aws_account_number
   cron                             = "cron(49 * * * ? *)"
+  secret_transmission_name         = module.function_secrets.secret_transmission_name
+  secret_transmission_arn          = module.function_secrets.secret_transmission_arn
   twitter_consumer_key_name        = module.function_secrets.twitter_consumer_key_name
   twitter_consumer_key_arn         = module.function_secrets.twitter_consumer_key_arn
   twitter_consumer_secret_name     = module.function_secrets.twitter_consumer_secret_name

@@ -1,3 +1,13 @@
+output "secret_transmission_name" {
+  description = "Secret Transmission - AWS Secret Name"
+  value       = aws_secretsmanager_secret.secret_transmission.name
+}
+
+output "secret_transmission_arn" {
+  description = "Secret Transmission - AWS Secret ARN"
+  value       = aws_secretsmanager_secret.secret_transmission.arn
+}
+
 output "twitter_consumer_key_name" {
   description = "Twitter Consumer Key - AWS Secret Name"
   value       = aws_secretsmanager_secret.twitter_consumer_key.name
