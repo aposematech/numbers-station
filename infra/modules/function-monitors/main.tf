@@ -14,7 +14,7 @@ resource "betteruptime_heartbeat" "heartbeat" {
   period = 3600
   grace  = 300
   email  = true
-  paused = true
+  paused = false
 }
 
 # https://registry.terraform.io/providers/BetterStackHQ/better-uptime/latest/docs/resources/betteruptime_status_page
