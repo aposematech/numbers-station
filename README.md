@@ -6,11 +6,11 @@
 
 ### Status Page
 
-- [charliesierra49.betteruptime.com](https://charliesierra49.betteruptime.com/)
+- [ping.station49.codes](https://ping.station49.codes)
 
 ### Hackaday
 
-- [Number Twitters](https://hackaday.com/2017/05/09/number-twitters/)
+- [Number Twitters](https://hackaday.com/2017/05/09/number-twitters)
 
 ### Wikipedia
 
