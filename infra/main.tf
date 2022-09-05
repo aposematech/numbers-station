@@ -56,7 +56,8 @@ module "git_repo" {
 }
 
 module "image_repo" {
-  source = "./modules/image-repo"
+  source          = "./modules/image-repo"
+  image_repo_name = module.git_repo.git_repo_name
 }
 
 module "function_secrets" {
@@ -75,6 +76,7 @@ module "function_secrets" {
 
 module "lambda_function" {
   source                           = "./modules/lambda-function"
+  function_name                    = module.image_repo.image_repo_name
   aws_region                       = var.aws_region
   aws_account_number               = var.aws_account_number
   cron                             = var.cron

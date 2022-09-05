@@ -10,7 +10,7 @@ terraform {
 
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ecr_repository
 resource "aws_ecr_repository" "ecr_repo" {
-  name                 = terraform.workspace
+  name                 = var.image_repo_name
   image_tag_mutability = "MUTABLE"
 
   image_scanning_configuration {
