@@ -10,6 +10,12 @@ variable "git_repo_visibility" {
   default     = ""
 }
 
+variable "registered_domain_name" {
+  description = "Route 53 Registered Domain Name"
+  type        = string
+  default     = ""
+}
+
 variable "aws_access_key_id" {
   description = "AWS Access Key ID - GitHub Actions Secret"
   type        = string
@@ -98,6 +104,12 @@ variable "betteruptime_api_token" {
 
 variable "betteruptime_subdomain" {
   description = "Better Uptime Status Page Subdomain"
+  type        = string
+  default     = ""
+}
+
+variable "custom_status_page_subdomain" {
+  description = "Custom Status Page Subdomain"
   type        = string
   default     = ""
 }

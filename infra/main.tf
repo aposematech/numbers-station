@@ -89,9 +89,17 @@ module "lambda_function" {
   heartbeat_monitor_url            = module.function_monitors.heartbeat_monitor_url
 }
 
+module "function_domain" {
+  source                 = "./modules/function-domain"
+  registered_domain_name = var.registered_domain_name
+}
+
 module "function_monitors" {
-  source                 = "./modules/function-monitors"
-  betteruptime_subdomain = var.betteruptime_subdomain
-  twitter_handle         = var.twitter_handle
-  twitter_url            = var.twitter_url
+  source                       = "./modules/function-monitors"
+  registered_domain_name       = module.function_domain.registered_domain_name
+  hosted_zone_id               = module.function_domain.hosted_zone_id
+  betteruptime_subdomain       = var.betteruptime_subdomain
+  custom_status_page_subdomain = var.custom_status_page_subdomain
+  twitter_handle               = var.twitter_handle
+  twitter_url                  = var.twitter_url
 }
