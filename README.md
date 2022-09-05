@@ -1,6 +1,6 @@
 # numbers-station
 
-### Twitter Profile
+### Twitter Bot
 
 - [@CharlieSierra49](https://twitter.com/CharlieSierra49)
 
