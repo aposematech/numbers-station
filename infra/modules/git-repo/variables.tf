@@ -47,3 +47,16 @@ variable "aws_access_key_value" {
   default     = ""
   sensitive   = true
 }
+
+variable "aws_region_name" {
+  description = "AWS Region - GitHub Actions Secret Name"
+  type        = string
+  default     = ""
+}
+
+variable "aws_region_value" {
+  description = "AWS Region - GitHub Actions Secret Value"
+  type        = string
+  default     = ""
+  sensitive   = true
+}

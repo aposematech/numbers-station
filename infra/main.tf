@@ -51,6 +51,8 @@ module "git_repo" {
   aws_access_key_id_value = var.aws_access_key_id
   aws_access_key_name     = "AWS_SECRET_ACCESS_KEY"
   aws_access_key_value    = var.aws_access_key
+  aws_region_name         = "AWS_REGION"
+  aws_region_value        = var.aws_region
 }
 
 module "image_repo" {
