@@ -1,3 +1,15 @@
+variable "git_repo_description" {
+  description = "GitHub Repo Description"
+  type        = string
+  default     = ""
+}
+
+variable "git_repo_visibility" {
+  description = "GitHub Repo Visibility"
+  type        = string
+  default     = ""
+}
+
 variable "aws_access_key_id" {
   description = "AWS Access Key ID - GitHub Actions Secret"
   type        = string
