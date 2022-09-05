@@ -91,5 +91,6 @@ module "lambda_function" {
 module "function_monitors" {
   source                 = "./modules/function-monitors"
   betteruptime_subdomain = var.betteruptime_subdomain
+  twitter_handle         = var.twitter_handle
   twitter_url            = var.twitter_url
 }

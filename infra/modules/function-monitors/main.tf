@@ -19,7 +19,7 @@ resource "betteruptime_heartbeat" "heartbeat" {
 
 # https://registry.terraform.io/providers/BetterStackHQ/better-uptime/latest/docs/resources/betteruptime_status_page
 resource "betteruptime_status_page" "status_page" {
-  company_name = var.betteruptime_subdomain
+  company_name = var.twitter_handle
   company_url  = var.twitter_url
   subdomain    = var.betteruptime_subdomain
   timezone     = "Central Time (US & Canada)"
