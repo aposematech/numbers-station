@@ -43,6 +43,7 @@ provider "betteruptime" {
 
 module "git_repo" {
   source                  = "./modules/git-repo"
+  git_repo_name           = terraform.workspace
   git_repo_description    = var.git_repo_description
   git_repo_homepage_url   = var.twitter_url
   git_repo_visibility     = var.git_repo_visibility
