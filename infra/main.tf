@@ -70,7 +70,7 @@ module "lambda_function" {
   source                           = "./modules/lambda-function"
   aws_region                       = var.aws_region
   aws_account_number               = var.aws_account_number
-  cron                             = "cron(49 * * * ? *)"
+  cron                             = var.cron
   secret_transmission_name         = module.function_secrets.secret_transmission_name
   secret_transmission_arn          = module.function_secrets.secret_transmission_arn
   twitter_consumer_key_name        = module.function_secrets.twitter_consumer_key_name
@@ -86,6 +86,6 @@ module "lambda_function" {
 
 module "function_monitors" {
   source                 = "./modules/function-monitors"
-  betteruptime_subdomain = "charliesierra49"
+  betteruptime_subdomain = var.betteruptime_subdomain
   twitter_url            = var.twitter_url
 }

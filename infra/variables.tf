@@ -15,11 +15,17 @@ variable "aws_access_key" {
 variable "aws_region" {
   description = "AWS Region"
   type        = string
-  default     = "us-east-1"
+  default     = ""
 }
 
 variable "aws_account_number" {
   description = "AWS Account Number"
+  type        = string
+  default     = ""
+}
+
+variable "cron" {
+  description = "Cron Expression"
   type        = string
   default     = ""
 }
@@ -34,7 +40,7 @@ variable "secret_transmission" {
 variable "twitter_url" {
   description = "Twitter URL"
   type        = string
-  default     = "https://twitter.com/CharlieSierra49"
+  default     = ""
 }
 
 variable "twitter_consumer_key" {
@@ -70,4 +76,10 @@ variable "betteruptime_api_token" {
   type        = string
   default     = ""
   sensitive   = true
+}
+
+variable "betteruptime_subdomain" {
+  description = "Better Uptime Status Page Subdomain"
+  type        = string
+  default     = ""
 }
