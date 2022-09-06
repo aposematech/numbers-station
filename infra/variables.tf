@@ -10,8 +10,14 @@ variable "git_repo_visibility" {
   default     = ""
 }
 
-variable "registered_domain_name" {
-  description = "Route 53 Registered Domain Name"
+variable "aws_region" {
+  description = "AWS Region"
+  type        = string
+  default     = ""
+}
+
+variable "aws_account_number" {
+  description = "AWS Account Number"
   type        = string
   default     = ""
 }
@@ -28,18 +34,6 @@ variable "aws_access_key" {
   type        = string
   default     = ""
   sensitive   = true
-}
-
-variable "aws_region" {
-  description = "AWS Region"
-  type        = string
-  default     = ""
-}
-
-variable "aws_account_number" {
-  description = "AWS Account Number"
-  type        = string
-  default     = ""
 }
 
 variable "cron" {
@@ -110,6 +104,12 @@ variable "betteruptime_subdomain" {
 
 variable "custom_status_page_subdomain" {
   description = "Custom Status Page Subdomain"
+  type        = string
+  default     = ""
+}
+
+variable "registered_domain_name" {
+  description = "Route 53 Registered Domain Name"
   type        = string
   default     = ""
 }
