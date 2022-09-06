@@ -28,7 +28,7 @@ resource "betteruptime_status_page" "status_page" {
 
 # https://registry.terraform.io/providers/BetterStackHQ/better-uptime/latest/docs/resources/betteruptime_status_page_resource
 resource "betteruptime_status_page_resource" "status_page_resource" {
-  public_name    = var.betteruptime_subdomain
+  public_name    = var.twitter_handle
   resource_id    = betteruptime_heartbeat.heartbeat.id
   resource_type  = "Heartbeat"
   status_page_id = betteruptime_status_page.status_page.id
