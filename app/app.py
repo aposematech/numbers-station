@@ -8,6 +8,7 @@ import qrcode # https://pypi.org/project/qrcode/
 import random
 import requests
 import string
+import json
 import tweepy # https://docs.tweepy.org/en/stable/
 
 # https://awslabs.github.io/aws-lambda-powertools-python/latest/
@@ -64,10 +65,10 @@ def handler(event, context):
         "headers": {
             "Content-Type": "application/json"
         },
-        "body": {
+        "body": json.dumps({
             "alphabet": alphabet,
             "plain_text": plain_text,
             "one_time_pad": one_time_pad,
             "cipher_text": cipher_text
-        }
+        })
     }
