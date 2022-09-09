@@ -88,9 +88,3 @@ variable "twitter_access_token_secret" {
   default     = ""
   sensitive   = true
 }
-
-variable "registered_domain_name" {
-  description = "Route 53 Registered Domain Name"
-  type        = string
-  default     = ""
-}

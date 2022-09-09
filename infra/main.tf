@@ -82,8 +82,3 @@ module "lambda_function" {
   twitter_access_token_secret_name = module.function_secrets.twitter_access_token_secret_name
   twitter_access_token_secret_arn  = module.function_secrets.twitter_access_token_secret_arn
 }
-
-module "function_domain" {
-  source                 = "./modules/function-domain"
-  registered_domain_name = var.registered_domain_name
-}
