@@ -90,7 +90,6 @@ module "lambda_function" {
   twitter_access_token_arn         = module.function_secrets.twitter_access_token_arn
   twitter_access_token_secret_name = module.function_secrets.twitter_access_token_secret_name
   twitter_access_token_secret_arn  = module.function_secrets.twitter_access_token_secret_arn
-  heartbeat_monitor_url            = module.function_monitors.heartbeat_monitor_url
 }
 
 module "function_domain" {
