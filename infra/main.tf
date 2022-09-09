@@ -17,10 +17,6 @@ terraform {
       source  = "hashicorp/aws"
       version = "~> 4.28.0"
     }
-    betteruptime = {
-      source  = "BetterStackHQ/better-uptime"
-      version = "~> 0.3.0"
-    }
   }
 }
 
@@ -34,11 +30,6 @@ provider "aws" {
   region = var.aws_region
   # export AWS_ACCESS_KEY_ID
   # export AWS_SECRET_ACCESS_KEY
-}
-
-# https://registry.terraform.io/providers/BetterStackHQ/better-uptime/latest/docs
-provider "betteruptime" {
-  api_token = var.betteruptime_api_token
 }
 
 module "git_repo" {
@@ -95,14 +86,4 @@ module "lambda_function" {
 module "function_domain" {
   source                 = "./modules/function-domain"
   registered_domain_name = var.registered_domain_name
-}
-
-module "function_monitors" {
-  source                       = "./modules/function-monitors"
-  twitter_handle               = var.twitter_handle
-  twitter_url                  = var.twitter_url
-  betteruptime_subdomain       = var.betteruptime_subdomain
-  custom_status_page_subdomain = var.custom_status_page_subdomain
-  registered_domain_name       = module.function_domain.registered_domain_name
-  hosted_zone_id               = module.function_domain.hosted_zone_id
 }

@@ -81,9 +81,3 @@ variable "twitter_access_token_secret_arn" {
   type        = string
   default     = ""
 }
-
-variable "heartbeat_monitor_url" {
-  description = "Better Uptime Heartbeat Monitor URL"
-  type        = string
-  default     = ""
-}
