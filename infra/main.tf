@@ -32,8 +32,8 @@ provider "aws" {
   # export AWS_SECRET_ACCESS_KEY
 }
 
-module "git_repo" {
-  source                  = "./modules/git-repo"
+module "git" {
+  source                  = "./modules/git"
   git_repo_name           = terraform.workspace
   git_repo_description    = var.git_repo_description
   git_repo_homepage_url   = var.twitter_url
@@ -46,13 +46,13 @@ module "git_repo" {
   aws_region_value        = var.aws_region
 }
 
-module "image_repo" {
-  source          = "./modules/image-repo"
-  image_repo_name = module.git_repo.git_repo_name
+module "ecr" {
+  source        = "./modules/ecr"
+  ecr_repo_name = module.git.git_repo_name
 }
 
-module "function_secrets" {
-  source                            = "./modules/function-secrets"
+module "secrets" {
+  source                            = "./modules/secrets"
   secret_transmission_name          = "SECRET_TRANSMISSION"
   secret_transmission_value         = var.secret_transmission
   twitter_consumer_key_name         = "TWITTER_CONSUMER_KEY"
@@ -65,20 +65,20 @@ module "function_secrets" {
   twitter_access_token_secret_value = var.twitter_access_token_secret
 }
 
-module "lambda_function" {
-  source                           = "./modules/lambda-function"
-  function_name                    = module.image_repo.image_repo_name
+module "lambda" {
+  source                           = "./modules/lambda"
+  function_name                    = module.ecr.ecr_repo_name
   aws_region                       = var.aws_region
   aws_account_number               = var.aws_account_number
   cron                             = var.cron
-  secret_transmission_name         = module.function_secrets.secret_transmission_name
-  secret_transmission_arn          = module.function_secrets.secret_transmission_arn
-  twitter_consumer_key_name        = module.function_secrets.twitter_consumer_key_name
-  twitter_consumer_key_arn         = module.function_secrets.twitter_consumer_key_arn
-  twitter_consumer_secret_name     = module.function_secrets.twitter_consumer_secret_name
-  twitter_consumer_secret_arn      = module.function_secrets.twitter_consumer_secret_arn
-  twitter_access_token_name        = module.function_secrets.twitter_access_token_name
-  twitter_access_token_arn         = module.function_secrets.twitter_access_token_arn
-  twitter_access_token_secret_name = module.function_secrets.twitter_access_token_secret_name
-  twitter_access_token_secret_arn  = module.function_secrets.twitter_access_token_secret_arn
+  secret_transmission_name         = module.secrets.secret_transmission_name
+  secret_transmission_arn          = module.secrets.secret_transmission_arn
+  twitter_consumer_key_name        = module.secrets.twitter_consumer_key_name
+  twitter_consumer_key_arn         = module.secrets.twitter_consumer_key_arn
+  twitter_consumer_secret_name     = module.secrets.twitter_consumer_secret_name
+  twitter_consumer_secret_arn      = module.secrets.twitter_consumer_secret_arn
+  twitter_access_token_name        = module.secrets.twitter_access_token_name
+  twitter_access_token_arn         = module.secrets.twitter_access_token_arn
+  twitter_access_token_secret_name = module.secrets.twitter_access_token_secret_name
+  twitter_access_token_secret_arn  = module.secrets.twitter_access_token_secret_arn
 }
