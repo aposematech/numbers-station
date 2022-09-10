@@ -4,10 +4,6 @@
 
 - [@CharlieSierra49](https://twitter.com/CharlieSierra49)
 
-### Status Page
-
-- [ping.station49.codes](https://ping.station49.codes)
-
 ### Hackaday
 
 - [Number Twitters](https://hackaday.com/2017/05/09/number-twitters)
