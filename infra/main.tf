@@ -30,6 +30,12 @@ provider "aws" {
   region = var.aws_region
   # export AWS_ACCESS_KEY_ID
   # export AWS_SECRET_ACCESS_KEY
+
+  default_tags {
+    tags = {
+      Workspace = terraform.workspace
+    }
+  }
 }
 
 module "git" {
