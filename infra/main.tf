@@ -92,14 +92,14 @@ module "lambda" {
   aws_region                       = var.aws_region
   aws_account_number               = var.aws_account_number
   cron                             = var.cron
-  secret_transmission_name         = module.secrets.secret_transmission_name
-  secret_transmission_arn          = module.secrets.secret_transmission_arn
-  twitter_consumer_key_name        = module.secrets.twitter_consumer_key_name
-  twitter_consumer_key_arn         = module.secrets.twitter_consumer_key_arn
-  twitter_consumer_secret_name     = module.secrets.twitter_consumer_secret_name
-  twitter_consumer_secret_arn      = module.secrets.twitter_consumer_secret_arn
-  twitter_access_token_name        = module.secrets.twitter_access_token_name
-  twitter_access_token_arn         = module.secrets.twitter_access_token_arn
-  twitter_access_token_secret_name = module.secrets.twitter_access_token_secret_name
-  twitter_access_token_secret_arn  = module.secrets.twitter_access_token_secret_arn
+  secret_transmission_name         = module.parameters.secret_transmission_name
+  secret_transmission_arn          = module.parameters.secret_transmission_arn
+  twitter_consumer_key_name        = module.parameters.twitter_consumer_key_name
+  twitter_consumer_key_arn         = module.parameters.twitter_consumer_key_arn
+  twitter_consumer_secret_name     = module.parameters.twitter_consumer_secret_name
+  twitter_consumer_secret_arn      = module.parameters.twitter_consumer_secret_arn
+  twitter_access_token_name        = module.parameters.twitter_access_token_name
+  twitter_access_token_arn         = module.parameters.twitter_access_token_arn
+  twitter_access_token_secret_name = module.parameters.twitter_access_token_secret_name
+  twitter_access_token_secret_arn  = module.parameters.twitter_access_token_secret_arn
 }

@@ -29,7 +29,7 @@ def get_cipher_text_blocks(text, size):
 def handler(event, context):
     # encrypt plaintext
     alphabet = string.ascii_uppercase
-    plain_text = get_alpha_only(parameters.get_secret(os.environ['SECRET_TRANSMISSION_NAME']))
+    plain_text = get_alpha_only(parameters.get_parameter(os.environ['SECRET_TRANSMISSION_NAME']))
     one_time_pad = get_one_time_pad(alphabet, plain_text)
     cipher_text = get_cipher_text_blocks(get_cipher_text(alphabet, plain_text, one_time_pad), 5)
     # create qrcode
@@ -37,10 +37,10 @@ def handler(event, context):
     cipher_text_qr_code = qrcode.make(cipher_text)
     cipher_text_qr_code.save(cipher_text_qr_code_filename)
     # get secrets
-    twitter_consumer_key = parameters.get_secret(os.environ['TWITTER_CONSUMER_KEY_NAME'])
-    twitter_consumer_secret = parameters.get_secret(os.environ['TWITTER_CONSUMER_SECRET_NAME'])
-    twitter_access_token = parameters.get_secret(os.environ['TWITTER_ACCESS_TOKEN_NAME'])
-    twitter_access_token_secret = parameters.get_secret(os.environ['TWITTER_ACCESS_TOKEN_SECRET_NAME'])
+    twitter_consumer_key = parameters.get_parameter(os.environ['TWITTER_CONSUMER_KEY_NAME'])
+    twitter_consumer_secret = parameters.get_parameter(os.environ['TWITTER_CONSUMER_SECRET_NAME'])
+    twitter_access_token = parameters.get_parameter(os.environ['TWITTER_ACCESS_TOKEN_NAME'])
+    twitter_access_token_secret = parameters.get_parameter(os.environ['TWITTER_ACCESS_TOKEN_SECRET_NAME'])
     # upload qrcode
     auth = tweepy.OAuth1UserHandler(
         twitter_consumer_key, 
