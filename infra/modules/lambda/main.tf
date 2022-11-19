@@ -90,7 +90,7 @@ resource "aws_lambda_function" "lambda_function" {
   role          = aws_iam_role.lambda_role.arn
   environment {
     variables = {
-      SECRET_TRANSMISSION_NAME         = var.secret_transmission_name
+      SECRET_TRANSMISSION_NAME         = var.secret_transmission_name,
       TWITTER_CONSUMER_KEY_NAME        = var.twitter_consumer_key_name,
       TWITTER_CONSUMER_SECRET_NAME     = var.twitter_consumer_secret_name,
       TWITTER_ACCESS_TOKEN_NAME        = var.twitter_access_token_name,
