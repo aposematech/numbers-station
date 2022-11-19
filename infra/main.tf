@@ -72,6 +72,20 @@ module "secrets" {
   twitter_access_token_secret_value = var.twitter_access_token_secret
 }
 
+module "parameters" {
+  source                            = "./modules/parameters"
+  secret_transmission_name          = "SECRET_TRANSMISSION"
+  secret_transmission_value         = var.secret_transmission
+  twitter_consumer_key_name         = "TWITTER_CONSUMER_KEY"
+  twitter_consumer_key_value        = var.twitter_consumer_key
+  twitter_consumer_secret_name      = "TWITTER_CONSUMER_SECRET"
+  twitter_consumer_secret_value     = var.twitter_consumer_secret
+  twitter_access_token_name         = "TWITTER_ACCESS_TOKEN"
+  twitter_access_token_value        = var.twitter_access_token
+  twitter_access_token_secret_name  = "TWITTER_ACCESS_TOKEN_SECRET"
+  twitter_access_token_secret_value = var.twitter_access_token_secret
+}
+
 module "lambda" {
   source                           = "./modules/lambda"
   function_name                    = module.ecr.ecr_repo_name
