@@ -6,6 +6,7 @@
 import os
 import qrcode # https://pypi.org/project/qrcode/
 import random
+import requests
 import string
 import json
 import tweepy # https://docs.tweepy.org/en/stable/
@@ -57,6 +58,8 @@ def handler(event, context):
         access_token=twitter_access_token, 
         access_token_secret=twitter_access_token_secret)
     client.create_tweet(text=cipher_text, media_ids=cipher_text_qr_code_media_ids)
+    # ping heartbeat monitor
+    requests.get(os.environ['HEARTBEAT_MONITOR_URL'])
     return { 
         "statusCode": 200,
         "headers": {
