@@ -1,6 +1,27 @@
 # This file is maintained automatically by "terraform init".
 # Manual edits may be lost in future updates.
 
+provider "registry.terraform.io/betterstackhq/better-uptime" {
+  version     = "0.3.13"
+  constraints = "~> 0.3.0"
+  hashes = [
+    "h1:LBL/mroUDqCgb4WK5DFUZnZ7pWcTzAq42xPF6Vs5dwI=",
+    "zh:01cd34d309ebddf9ab9a959bf9a9150adc00b00e55bfd2b9fda5f03894660cf6",
+    "zh:2aad6f9c88acd3577a7411f51720c02b02445335c71d0de134482bf7edf3b7b7",
+    "zh:4171e07c9a2281c71526000e99dfdb02f7de54d4beb955fb00f1a3eec553d0ec",
+    "zh:4cd58ce30507cc2dbc3241a69f678640e1954c8334a651edff4beef90a75b997",
+    "zh:5e7a7345fb59462ea2cc02ee7980e27963f8f1f0616f9dde563946690630649b",
+    "zh:6e95f0263e8d416e88bd91febc35b472e9a6ddc154b61c2401aa19ab1effd7bd",
+    "zh:91b799dd361fa9e71aa0dd5d8e8689386ab0dfbc89ceff47d885fd15bd4ec647",
+    "zh:abae2433d76414cf734e4e93ce07957f01b62b280256e13c7282b72f69a02009",
+    "zh:b0dd58466b02f6fe4945e3a05c150887d4f773ccc6720be57c8f079fee514dae",
+    "zh:b2bf6e94a909e49f5c1e6140e95fc35ea4639facdd96dd67bfdbdedab28ef2db",
+    "zh:b7cd46855cb47a9fc975b4cdad8680fb2e29c876b61b86d83433f5e1a21bae83",
+    "zh:c5e03125f8a76f1364089979b67f862da5d613e068c57dc8f0406cffc812c1d6",
+    "zh:f660bd11de97c9d8ec9b4d86dc7dbe7ae6a5266e636e87074eb33d114e8fac4a",
+  ]
+}
+
 provider "registry.terraform.io/hashicorp/aws" {
   version     = "4.28.0"
   constraints = ">= 4.10.0"

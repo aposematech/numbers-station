@@ -67,3 +67,9 @@ variable "twitter_access_token_secret_arn" {
   description = "Twitter Access Token Secret - AWS Secret ARN"
   type        = string
 }
+
+variable "heartbeat_monitor_url" {
+  description = "Better Uptime Heartbeat Monitor URL"
+  type        = string
+  default     = ""
+}

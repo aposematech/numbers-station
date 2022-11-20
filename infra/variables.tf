@@ -74,3 +74,16 @@ variable "twitter_access_token_secret" {
   type        = string
   sensitive   = true
 }
+
+variable "betteruptime_api_token" {
+  description = "Better Uptime API Token"
+  type        = string
+  default     = ""
+  sensitive   = true
+}
+
+variable "betteruptime_subdomain" {
+  description = "Better Uptime Status Page Subdomain"
+  type        = string
+  default     = ""
+}

@@ -17,6 +17,10 @@ terraform {
       source  = "hashicorp/aws"
       version = "~> 4.28.0"
     }
+    betteruptime = {
+      source  = "BetterStackHQ/better-uptime"
+      version = "~> 0.3.0"
+    }
   }
 }
 
@@ -39,6 +43,11 @@ provider "aws" {
   }
 }
 
+# https://registry.terraform.io/providers/BetterStackHQ/better-uptime/latest/docs
+provider "betteruptime" {
+  api_token = var.betteruptime_api_token
+}
+
 module "git" {
   source                  = "./modules/git"
   git_repo_name           = terraform.workspace
@@ -55,7 +64,7 @@ module "git" {
 
 module "ecr" {
   source        = "./modules/ecr"
-  ecr_repo_name = module.git.git_repo_name
+  ecr_repo_name = terraform.workspace
 }
 
 module "parameters" {
@@ -74,7 +83,7 @@ module "parameters" {
 
 module "lambda" {
   source                           = "./modules/lambda"
-  function_name                    = module.ecr.ecr_repo_name
+  function_name                    = terraform.workspace
   aws_region                       = var.aws_region
   aws_account_number               = var.aws_account_number
   cron                             = var.cron
@@ -88,4 +97,10 @@ module "lambda" {
   twitter_access_token_arn         = module.parameters.twitter_access_token_arn
   twitter_access_token_secret_name = module.parameters.twitter_access_token_secret_name
   twitter_access_token_secret_arn  = module.parameters.twitter_access_token_secret_arn
+  heartbeat_monitor_url            = module.ops.heartbeat_monitor_url
+}
+
+module "ops" {
+  source                      = "./modules/ops"
+  betteruptime_heartbeat_name = terraform.workspace
 }
