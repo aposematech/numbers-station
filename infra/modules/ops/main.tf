@@ -14,7 +14,5 @@ resource "betteruptime_heartbeat" "heartbeat" {
   period = 3600
   grace  = 300
   email  = true
-  paused = true
+  paused = false
 }
-
-
