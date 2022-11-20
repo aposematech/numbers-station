@@ -81,9 +81,3 @@ variable "betteruptime_api_token" {
   default     = ""
   sensitive   = true
 }
-
-variable "betteruptime_subdomain" {
-  description = "Better Uptime Status Page Subdomain"
-  type        = string
-  default     = ""
-}
