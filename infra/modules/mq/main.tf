@@ -11,6 +11,7 @@ terraform {
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/sqs_queue
 resource "aws_sqs_queue" "queue" {
   name = var.queue_name
+  message_retention_seconds = 3600
 }
 
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/sns_topic
