@@ -43,7 +43,7 @@ data "aws_iam_policy_document" "lambda_role_permissions_policy_document" {
     effect = "Allow"
     actions = [
       "s3:PutObject",
-      "s3:PutObjectAcl"
+      "s3:PutObjectAcl",
     ]
     resources = [
       "${var.website_bucket_arn}/*",
