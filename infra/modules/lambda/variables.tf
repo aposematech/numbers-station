@@ -38,6 +38,11 @@ variable "website_bucket_arn" {
   type        = string
 }
 
+variable "bucket_folder_name" {
+  description = "S3 Bucket Folder Name"
+  type        = string
+}
+
 variable "heartbeat_monitor_url" {
   description = "Better Uptime Heartbeat Monitor URL"
   type        = string

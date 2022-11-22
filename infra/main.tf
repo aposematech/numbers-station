@@ -84,6 +84,7 @@ module "lambda" {
   secret_transmission_arn  = module.parameters.secret_transmission_arn
   website_bucket_name      = module.web.website_bucket_name
   website_bucket_arn       = module.web.website_bucket_arn
+  bucket_folder_name       = terraform.workspace
   heartbeat_monitor_url    = module.ops.heartbeat_monitor_url
 }
 
