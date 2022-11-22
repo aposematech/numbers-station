@@ -136,7 +136,7 @@ resource "aws_lambda_permission" "lambda_permission_allow_cloudwatch" {
   source_arn    = aws_cloudwatch_event_rule.cloudwatch_event_rule.arn
 }
 
-resource "aws_lambda_function_event_invoke_config" "example" {
+resource "aws_lambda_function_event_invoke_config" "invoke_config" {
   function_name = var.function_name
 
   destination_config {
