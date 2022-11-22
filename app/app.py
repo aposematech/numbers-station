@@ -45,9 +45,6 @@ def handler(event, context):
             "Content-Type": "application/json"
         },
         "body": json.dumps({
-            "alphabet": alphabet,
-            "plain_text": plain_text,
             "one_time_pad": one_time_pad,
-            "cipher_text": cipher_text
         })
     }
