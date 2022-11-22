@@ -85,7 +85,14 @@ module "lambda" {
   website_bucket_name      = module.web.website_bucket_name
   website_bucket_arn       = module.web.website_bucket_arn
   bucket_folder_name       = terraform.workspace
+  topic_arn                = module.mq.topic_arn
   heartbeat_monitor_url    = module.ops.heartbeat_monitor_url
+}
+
+module "mq" {
+  source     = "./modules/mq"
+  topic_name = terraform.workspace
+  queue_name = terraform.workspace
 }
 
 module "web" {

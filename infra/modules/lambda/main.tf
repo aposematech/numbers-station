@@ -49,6 +49,15 @@ data "aws_iam_policy_document" "lambda_role_permissions_policy_document" {
       "${var.website_bucket_arn}/${var.bucket_folder_name}/*",
     ]
   }
+  statement {
+    effect = "Allow"
+    actions = [
+      "sns:Publish",
+    ]
+    resources = [
+      var.topic_arn,
+    ]
+  }
 }
 
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_policy
@@ -125,4 +134,14 @@ resource "aws_lambda_permission" "lambda_permission_allow_cloudwatch" {
   function_name = aws_lambda_function.lambda_function.function_name
   principal     = "events.amazonaws.com"
   source_arn    = aws_cloudwatch_event_rule.cloudwatch_event_rule.arn
+}
+
+resource "aws_lambda_function_event_invoke_config" "example" {
+  function_name = var.function_name
+
+  destination_config {
+    on_success {
+      destination = var.topic_arn
+    }
+  }
 }

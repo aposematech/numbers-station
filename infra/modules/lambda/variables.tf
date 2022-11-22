@@ -43,6 +43,11 @@ variable "bucket_folder_name" {
   type        = string
 }
 
+variable "topic_arn" {
+  description = "SNS Topic ARN"
+  type        = string
+}
+
 variable "heartbeat_monitor_url" {
   description = "Better Uptime Heartbeat Monitor URL"
   type        = string
