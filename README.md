@@ -1,6 +1,6 @@
 # numbers-station
 
-- [twitter.com/CharlieSierra49](https://twitter.com/CharlieSierra49)
+- [djfav.ninja](https://djfav.ninja)
 
 # aws
 
