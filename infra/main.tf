@@ -52,8 +52,8 @@ module "git" {
   source                  = "./modules/git"
   git_repo_name           = terraform.workspace
   git_repo_description    = var.git_repo_description
-  git_repo_homepage_url   = var.twitter_url
-  git_repo_topics         = ["bot", "demo", "twitter"]
+  git_repo_homepage_url   = var.git_repo_homepage_url
+  git_repo_topics         = ["bot", "demo"]
   git_repo_visibility     = var.git_repo_visibility
   aws_access_key_id_name  = "AWS_ACCESS_KEY_ID"
   aws_access_key_id_value = var.aws_access_key_id
@@ -69,36 +69,20 @@ module "ecr" {
 }
 
 module "parameters" {
-  source                            = "./modules/parameters"
-  secret_transmission_name          = "SECRET_TRANSMISSION"
-  secret_transmission_value         = var.secret_transmission
-  twitter_consumer_key_name         = "TWITTER_CONSUMER_KEY"
-  twitter_consumer_key_value        = var.twitter_consumer_key
-  twitter_consumer_secret_name      = "TWITTER_CONSUMER_SECRET"
-  twitter_consumer_secret_value     = var.twitter_consumer_secret
-  twitter_access_token_name         = "TWITTER_ACCESS_TOKEN"
-  twitter_access_token_value        = var.twitter_access_token
-  twitter_access_token_secret_name  = "TWITTER_ACCESS_TOKEN_SECRET"
-  twitter_access_token_secret_value = var.twitter_access_token_secret
+  source                    = "./modules/parameters"
+  secret_transmission_name  = "SECRET_TRANSMISSION"
+  secret_transmission_value = var.secret_transmission
 }
 
 module "lambda" {
-  source                           = "./modules/lambda"
-  function_name                    = terraform.workspace
-  aws_region                       = var.aws_region
-  aws_account_number               = var.aws_account_number
-  cron                             = var.cron
-  secret_transmission_name         = module.parameters.secret_transmission_name
-  secret_transmission_arn          = module.parameters.secret_transmission_arn
-  twitter_consumer_key_name        = module.parameters.twitter_consumer_key_name
-  twitter_consumer_key_arn         = module.parameters.twitter_consumer_key_arn
-  twitter_consumer_secret_name     = module.parameters.twitter_consumer_secret_name
-  twitter_consumer_secret_arn      = module.parameters.twitter_consumer_secret_arn
-  twitter_access_token_name        = module.parameters.twitter_access_token_name
-  twitter_access_token_arn         = module.parameters.twitter_access_token_arn
-  twitter_access_token_secret_name = module.parameters.twitter_access_token_secret_name
-  twitter_access_token_secret_arn  = module.parameters.twitter_access_token_secret_arn
-  heartbeat_monitor_url            = module.ops.heartbeat_monitor_url
+  source                   = "./modules/lambda"
+  function_name            = terraform.workspace
+  aws_region               = var.aws_region
+  aws_account_number       = var.aws_account_number
+  cron                     = var.cron
+  secret_transmission_name = module.parameters.secret_transmission_name
+  secret_transmission_arn  = module.parameters.secret_transmission_arn
+  heartbeat_monitor_url    = module.ops.heartbeat_monitor_url
 }
 
 module "ops" {

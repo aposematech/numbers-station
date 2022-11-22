@@ -1,3 +1,2 @@
 aws-lambda-powertools
 qrcode[pil]
-tweepy

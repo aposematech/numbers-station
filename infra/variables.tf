@@ -8,6 +8,11 @@ variable "git_repo_visibility" {
   type        = string
 }
 
+variable "git_repo_homepage_url" {
+  description = "GitHub Repo Homepage URL"
+  type        = string
+}
+
 variable "aws_region" {
   description = "AWS Region"
   type        = string
@@ -37,40 +42,6 @@ variable "cron" {
 
 variable "secret_transmission" {
   description = "Secret Transmission - AWS Secret"
-  type        = string
-  sensitive   = true
-}
-
-variable "twitter_handle" {
-  description = "Twitter Handle"
-  type        = string
-}
-
-variable "twitter_url" {
-  description = "Twitter URL"
-  type        = string
-}
-
-variable "twitter_consumer_key" {
-  description = "Twitter Consumer Key - AWS Secret"
-  type        = string
-  sensitive   = true
-}
-
-variable "twitter_consumer_secret" {
-  description = "Twitter Consumer Secret - AWS Secret"
-  type        = string
-  sensitive   = true
-}
-
-variable "twitter_access_token" {
-  description = "Twitter Access Token - AWS Secret"
-  type        = string
-  sensitive   = true
-}
-
-variable "twitter_access_token_secret" {
-  description = "Twitter Access Token Secret - AWS Secret"
   type        = string
   sensitive   = true
 }

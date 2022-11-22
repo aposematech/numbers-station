@@ -37,10 +37,6 @@ data "aws_iam_policy_document" "lambda_role_permissions_policy_document" {
     ]
     resources = [
       var.secret_transmission_arn,
-      var.twitter_consumer_key_arn,
-      var.twitter_consumer_secret_arn,
-      var.twitter_access_token_arn,
-      var.twitter_access_token_secret_arn,
     ]
   }
 }
@@ -90,12 +86,8 @@ resource "aws_lambda_function" "lambda_function" {
   role          = aws_iam_role.lambda_role.arn
   environment {
     variables = {
-      SECRET_TRANSMISSION_NAME         = var.secret_transmission_name,
-      TWITTER_CONSUMER_KEY_NAME        = var.twitter_consumer_key_name,
-      TWITTER_CONSUMER_SECRET_NAME     = var.twitter_consumer_secret_name,
-      TWITTER_ACCESS_TOKEN_NAME        = var.twitter_access_token_name,
-      TWITTER_ACCESS_TOKEN_SECRET_NAME = var.twitter_access_token_secret_name,
-      HEARTBEAT_MONITOR_URL            = var.heartbeat_monitor_url,
+      SECRET_TRANSMISSION_NAME = var.secret_transmission_name,
+      HEARTBEAT_MONITOR_URL    = var.heartbeat_monitor_url,
     }
   }
 }

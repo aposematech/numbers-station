@@ -28,46 +28,6 @@ variable "secret_transmission_arn" {
   type        = string
 }
 
-variable "twitter_consumer_key_name" {
-  description = "Twitter Consumer Key - AWS Secret Name"
-  type        = string
-}
-
-variable "twitter_consumer_key_arn" {
-  description = "Twitter Consumer Key - AWS Secret ARN"
-  type        = string
-}
-
-variable "twitter_consumer_secret_name" {
-  description = "Twitter Consumer Secret - AWS Secret Name"
-  type        = string
-}
-
-variable "twitter_consumer_secret_arn" {
-  description = "Twitter Consumer Secret - AWS Secret ARN"
-  type        = string
-}
-
-variable "twitter_access_token_name" {
-  description = "Twitter Access Token - AWS Secret Name"
-  type        = string
-}
-
-variable "twitter_access_token_arn" {
-  description = "Twitter Access Token - AWS Secret ARN"
-  type        = string
-}
-
-variable "twitter_access_token_secret_name" {
-  description = "Twitter Access Token Secret - AWS Secret Name"
-  type        = string
-}
-
-variable "twitter_access_token_secret_arn" {
-  description = "Twitter Access Token Secret - AWS Secret ARN"
-  type        = string
-}
-
 variable "heartbeat_monitor_url" {
   description = "Better Uptime Heartbeat Monitor URL"
   type        = string

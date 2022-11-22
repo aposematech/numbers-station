@@ -3,13 +3,13 @@
 # https://docs.aws.amazon.com/lambda/latest/dg/python-handler.html
 # https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html
 
+import json
 import os
-import qrcode # https://pypi.org/project/qrcode/
 import random
 import requests
 import string
-import json
-import tweepy # https://docs.tweepy.org/en/stable/
+
+import qrcode # https://pypi.org/project/qrcode/
 
 # https://awslabs.github.io/aws-lambda-powertools-python/latest/
 from aws_lambda_powertools.utilities import parameters
@@ -37,27 +37,6 @@ def handler(event, context):
     cipher_text_qr_code_filename = "/tmp/cipher_text_qr_code.png"
     cipher_text_qr_code = qrcode.make(cipher_text)
     cipher_text_qr_code.save(cipher_text_qr_code_filename)
-    # get secrets
-    twitter_consumer_key = parameters.get_parameter(name=os.environ['TWITTER_CONSUMER_KEY_NAME'], decrypt=True)
-    twitter_consumer_secret = parameters.get_parameter(name=os.environ['TWITTER_CONSUMER_SECRET_NAME'], decrypt=True)
-    twitter_access_token = parameters.get_parameter(name=os.environ['TWITTER_ACCESS_TOKEN_NAME'], decrypt=True)
-    twitter_access_token_secret = parameters.get_parameter(name=os.environ['TWITTER_ACCESS_TOKEN_SECRET_NAME'], decrypt=True)
-    # upload qrcode
-    auth = tweepy.OAuth1UserHandler(
-        twitter_consumer_key, 
-        twitter_consumer_secret, 
-        twitter_access_token, 
-        twitter_access_token_secret)
-    api = tweepy.API(auth)
-    cipher_text_qr_code = api.media_upload(cipher_text_qr_code_filename)
-    cipher_text_qr_code_media_ids = [cipher_text_qr_code.media_id_string]
-    # tweet ciphertext and qrcode
-    client = tweepy.Client(
-        consumer_key=twitter_consumer_key, 
-        consumer_secret=twitter_consumer_secret, 
-        access_token=twitter_access_token, 
-        access_token_secret=twitter_access_token_secret)
-    client.create_tweet(text=cipher_text, media_ids=cipher_text_qr_code_media_ids)
     # ping heartbeat monitor
     requests.get(os.environ['HEARTBEAT_MONITOR_URL'])
     return { 
