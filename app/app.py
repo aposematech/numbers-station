@@ -39,6 +39,7 @@ def handler(event, context):
     cipher_text_qr_code.save(cipher_text_qr_code_filename)
     # ping heartbeat monitor
     requests.get(os.environ['HEARTBEAT_MONITOR_URL'])
+    # return key only
     return { 
         "statusCode": 200,
         "headers": {
