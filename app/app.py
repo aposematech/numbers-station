@@ -3,11 +3,13 @@
 # https://docs.aws.amazon.com/lambda/latest/dg/python-handler.html
 # https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html
 
+import boto3
 import json
 import os
 import random
 import requests
 import string
+import uuid
 
 import qrcode # https://pypi.org/project/qrcode/
 
@@ -34,9 +36,13 @@ def handler(event, context):
     one_time_pad = get_one_time_pad(alphabet, plain_text)
     cipher_text = get_cipher_text_blocks(get_cipher_text(alphabet, plain_text, one_time_pad), 5)
     # create qrcode
-    cipher_text_qr_code_filename = "/tmp/cipher_text_qr_code.png"
+    cipher_text_qr_code_filename = str(uuid.uuid4()) + ".png"
+    cipher_text_qr_code_filepath = "/tmp/" + cipher_text_qr_code_filename
     cipher_text_qr_code = qrcode.make(cipher_text)
-    cipher_text_qr_code.save(cipher_text_qr_code_filename)
+    cipher_text_qr_code.save(cipher_text_qr_code_filepath)
+    # upload qrcode
+    s3_client = boto3.client('s3')
+    s3_client.upload_file(cipher_text_qr_code_filepath, os.environ['WEBSITE_BUCKET_NAME'], cipher_text_qr_code_filename)
     # ping heartbeat monitor
     requests.get(os.environ['HEARTBEAT_MONITOR_URL'])
     # return key only
