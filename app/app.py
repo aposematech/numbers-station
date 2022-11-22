@@ -53,6 +53,6 @@ def handler(event, context):
             "Content-Type": "application/json"
         },
         "body": json.dumps({
-            "one_time_pad": one_time_pad,
+            "one_time_pad": one_time_pad
         })
     }
