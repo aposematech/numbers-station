@@ -39,6 +39,15 @@ data "aws_iam_policy_document" "lambda_role_permissions_policy_document" {
       var.secret_transmission_arn,
     ]
   }
+  statement {
+    effect = "Allow"
+    actions = [
+      "s3:PutObject",
+    ]
+    resources = [
+      "${var.website_bucket_arn}/*",
+    ]
+  }
 }
 
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_policy
@@ -87,6 +96,7 @@ resource "aws_lambda_function" "lambda_function" {
   environment {
     variables = {
       SECRET_TRANSMISSION_NAME = var.secret_transmission_name,
+      WEBSITE_BUCKET_NAME      = var.website_bucket_name,
       HEARTBEAT_MONITOR_URL    = var.heartbeat_monitor_url,
     }
   }

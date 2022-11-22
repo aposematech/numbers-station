@@ -82,7 +82,14 @@ module "lambda" {
   cron                     = var.cron
   secret_transmission_name = module.parameters.secret_transmission_name
   secret_transmission_arn  = module.parameters.secret_transmission_arn
+  website_bucket_name      = module.web.website_bucket_name
+  website_bucket_arn       = module.web.website_bucket_arn
   heartbeat_monitor_url    = module.ops.heartbeat_monitor_url
+}
+
+module "web" {
+  source                 = "./modules/web"
+  registered_domain_name = var.registered_domain_name
 }
 
 module "ops" {

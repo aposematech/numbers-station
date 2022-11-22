@@ -35,6 +35,11 @@ variable "aws_access_key" {
   sensitive   = true
 }
 
+variable "registered_domain_name" {
+  description = "Route 53 Registered Domain Name"
+  type        = string
+}
+
 variable "cron" {
   description = "Cron Expression"
   type        = string

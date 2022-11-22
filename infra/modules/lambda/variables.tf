@@ -19,12 +19,22 @@ variable "cron" {
 }
 
 variable "secret_transmission_name" {
-  description = "Secret Transmission - AWS Secret Name"
+  description = "Secret Transmission - AWS  Parameter Store Name"
   type        = string
 }
 
 variable "secret_transmission_arn" {
-  description = "Secret Transmission - AWS Secret ARN"
+  description = "Secret Transmission - AWS Parameter Store ARN"
+  type        = string
+}
+
+variable "website_bucket_name" {
+  description = "S3 Website Bucket Name"
+  type        = string
+}
+
+variable "website_bucket_arn" {
+  description = "S3 Website Bucket ARN"
   type        = string
 }
 
