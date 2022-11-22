@@ -94,6 +94,7 @@ resource "aws_lambda_function" "lambda_function" {
   package_type  = "Image"
   image_uri     = "${var.aws_account_number}.dkr.ecr.${var.aws_region}.amazonaws.com/${var.function_name}:latest"
   role          = aws_iam_role.lambda_role.arn
+  timeout       = 10
   environment {
     variables = {
       SECRET_TRANSMISSION_NAME = var.secret_transmission_name,
