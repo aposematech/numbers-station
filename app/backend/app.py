@@ -41,7 +41,7 @@ def handler(event, context):
     qr = qrcode.QRCode(
         version=1,
         error_correction=qrcode.constants.ERROR_CORRECT_L,
-        box_size=67,
+        box_size=20,
         border=4,
     )
     qr.add_data(cipher_text)
