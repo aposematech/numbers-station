@@ -1,4 +1,4 @@
-name: Build, tag, push, and deploy image
+name: Build, tag, push, deploy, upload
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
 
 jobs:
   deploy:
-    name: Build, tag, push, and deploy image
+    name: Build, tag, push, deploy, upload
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
@@ -24,7 +24,7 @@ jobs:
       id: login-ecr
       uses: aws-actions/amazon-ecr-login@v1 # https://github.com/marketplace/actions/amazon-ecr-login-action-for-github-actions
     
-    - name: Build, tag, push, and deploy image
+    - name: Build, tag, push, deploy, upload
       env:
         REGISTRY: ${{ steps.login-ecr.outputs.registry }}
         REPOSITORY: ${{ github.event.repository.name }}
@@ -33,3 +33,4 @@ jobs:
         docker build -t $REGISTRY/$REPOSITORY:$IMAGE_TAG .
         docker push $REGISTRY/$REPOSITORY:$IMAGE_TAG
         aws lambda update-function-code --function-name $REPOSITORY --image-uri $REGISTRY/$REPOSITORY:$IMAGE_TAG 2>&1 > /dev/null
+        aws s3 sync ./app/frontend s3://${{ secrets.WEBSITE_BUCKET_NAME }}/${{ $REPOSITORY }} --delete # https://docs.aws.amazon.com/cli/latest/reference/s3/sync.html

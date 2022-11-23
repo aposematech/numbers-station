@@ -1,0 +1,29 @@
+body {
+    background-color: black;
+    margin: 0px;
+    overflow: hidden;
+}
+
+img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
+
+footer {
+    background-color: black;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+p {
+    font-family: monospace;
+    text-align: center;
+}
+
+a {
+    color: white;
+}
