@@ -1,6 +1,6 @@
 # numbers-station
 
-- [djfav.ninja/numbers-station/index.html](https://djfav.ninja/numbers-station/index.html)
+- [djfav.ninja/numbers-station.html](https://djfav.ninja/numbers-station.html)
 
 # aws
 

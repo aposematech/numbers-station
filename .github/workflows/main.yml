@@ -33,4 +33,4 @@ jobs:
         docker build -t $REGISTRY/$REPOSITORY:$IMAGE_TAG .
         docker push $REGISTRY/$REPOSITORY:$IMAGE_TAG
         aws lambda update-function-code --function-name $REPOSITORY --image-uri $REGISTRY/$REPOSITORY:$IMAGE_TAG 2>&1 > /dev/null
-        aws s3 sync ./app/frontend s3://${{ secrets.WEBSITE_BUCKET_NAME }}/$REPOSITORY --delete # https://docs.aws.amazon.com/cli/latest/reference/s3/sync.html
+        aws s3 sync ./app/frontend s3://${{ secrets.WEBSITE_BUCKET_NAME }} # https://docs.aws.amazon.com/cli/latest/reference/s3/sync.html
