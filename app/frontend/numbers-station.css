@@ -1,6 +1,6 @@
 body {
     background-color: black;
-    margin: 40px, 0px, 0px, 0px;
+    margin: 75px 0px 0px 0px;
 }
 
 nav {
@@ -17,6 +17,7 @@ img {
 
 footer {
     background-color: black;
+    height: 40px;
 }
 
 p {
