@@ -36,6 +36,8 @@ def handler(event, context):
     one_time_pad = get_one_time_pad(alphabet, plain_text)
     cipher_text = get_cipher_text_blocks(get_cipher_text(alphabet, plain_text, one_time_pad), 5)
     # create qrcode
+    colors = [("black", "red"), ("white", "red"), ("red", "white")]
+    f_color, b_color = random.choice(colors)
     cipher_text_qr_code_filename = "numbers-station.png"
     cipher_text_qr_code_filepath = "/tmp/" + cipher_text_qr_code_filename
     qr = qrcode.QRCode(
@@ -46,7 +48,7 @@ def handler(event, context):
     )
     qr.add_data(cipher_text)
     qr.make(fit=True)
-    img = qr.make_image(fill_color="black", back_color="red")
+    img = qr.make_image(fill_color=f_color, back_color=b_color)
     img.save(cipher_text_qr_code_filepath)
     # upload qrcode
     s3_client = boto3.client('s3')
