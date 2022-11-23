@@ -55,3 +55,14 @@ variable "aws_region_value" {
   type        = string
   sensitive   = true
 }
+
+variable "website_bucket_name" {
+  description = "S3 Website Bucket - GitHub Actions Secret Name"
+  type        = string
+}
+
+variable "website_bucket_value" {
+  description = "S3 Bucket - GitHub Actions Secret Value"
+  type        = string
+  sensitive   = true
+}

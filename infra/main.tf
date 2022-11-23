@@ -61,6 +61,8 @@ module "git" {
   aws_access_key_value    = var.aws_access_key
   aws_region_name         = "AWS_REGION"
   aws_region_value        = var.aws_region
+  website_bucket_name     = "WEBSITE_BUCKET_NAME"
+  website_bucket_value    = module.web.website_bucket_name
 }
 
 module "ecr" {
