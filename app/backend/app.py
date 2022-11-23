@@ -38,8 +38,16 @@ def handler(event, context):
     # create qrcode
     cipher_text_qr_code_filename = "numbers-station.png"
     cipher_text_qr_code_filepath = "/tmp/" + cipher_text_qr_code_filename
-    cipher_text_qr_code = qrcode.make(cipher_text)
-    cipher_text_qr_code.save(cipher_text_qr_code_filepath)
+    qr = qrcode.QRCode(
+        version=1,
+        error_correction=qrcode.constants.ERROR_CORRECT_L,
+        box_size=10,
+        border=4,
+    )
+    qr.add_data(cipher_text)
+    qr.make(fit=True)
+    img = qr.make_image(fill_color="red", back_color="black")
+    img.save(cipher_text_qr_code_filepath)
     # upload qrcode
     s3_client = boto3.client('s3')
     with open(cipher_text_qr_code_filepath, "rb") as f:
