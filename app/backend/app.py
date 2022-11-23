@@ -46,7 +46,7 @@ def handler(event, context):
     )
     qr.add_data(cipher_text)
     qr.make(fit=True)
-    img = qr.make_image(fill_color="red", back_color="black")
+    img = qr.make_image(fill_color="black", back_color="red")
     img.save(cipher_text_qr_code_filepath)
     # upload qrcode
     s3_client = boto3.client('s3')
