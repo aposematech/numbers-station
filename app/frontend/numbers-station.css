@@ -4,11 +4,19 @@ body {
     overflow: hidden;
 }
 
-img {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 50%;
+@media screen and (min-width: 800px) {
+    img {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 50%;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    img {
+        width: 100%;
+    }
 }
 
 footer {
