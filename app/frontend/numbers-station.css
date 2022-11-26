@@ -3,14 +3,6 @@ body {
     margin: 75px 0px 0px 0px;
 }
 
-nav {
-    background-color: black;
-    height: 75px;
-    position: fixed;
-    top: 0;
-    width: 100%;
-}
-
 @media screen and (orientation: portrait) {
     img {
         width: 100%;
