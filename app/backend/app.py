@@ -36,7 +36,7 @@ def handler(event, context):
     one_time_pad = get_one_time_pad(alphabet, plain_text)
     cipher_text = get_cipher_text_blocks(get_cipher_text(alphabet, plain_text, one_time_pad), 5)
     # create qrcode
-    colors = [("black", "red"), ("white", "red"), ("red", "white")]
+    colors = [("white", "red"), ("red", "white")]
     f_color, b_color = random.choice(colors)
     cipher_text_qr_code_filename = "numbers-station.png"
     cipher_text_qr_code_filepath = "/tmp/" + cipher_text_qr_code_filename
