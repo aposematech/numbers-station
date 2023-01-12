@@ -11,10 +11,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
-      uses: actions/checkout@v3 # https://github.com/marketplace/actions/checkout
+      # https://github.com/marketplace/actions/checkout
+      uses: actions/checkout@v3
     
     - name: Configure AWS credentials
-      uses: aws-actions/configure-aws-credentials@v1-node16 # https://github.com/marketplace/actions/configure-aws-credentials-action-for-github-actions
+      # https://github.com/marketplace/actions/configure-aws-credentials-action-for-github-actions
+      uses: aws-actions/configure-aws-credentials@v1-node16
       with:
         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
@@ -22,7 +24,8 @@ jobs:
     
     - name: Amazon ECR login
       id: login-ecr
-      uses: aws-actions/amazon-ecr-login@v1 # https://github.com/marketplace/actions/amazon-ecr-login-action-for-github-actions
+      # https://github.com/marketplace/actions/amazon-ecr-login-action-for-github-actions
+      uses: aws-actions/amazon-ecr-login@v1
     
     - name: Build, tag, push, deploy, upload
       env:
@@ -33,4 +36,4 @@ jobs:
         docker build -t $REGISTRY/$REPOSITORY:$IMAGE_TAG .
         docker push $REGISTRY/$REPOSITORY:$IMAGE_TAG
         aws lambda update-function-code --function-name $REPOSITORY --image-uri $REGISTRY/$REPOSITORY:$IMAGE_TAG 2>&1 > /dev/null
-        aws s3 sync ./app/frontend s3://${{ secrets.WEBSITE_BUCKET_NAME }} # https://docs.aws.amazon.com/cli/latest/reference/s3/sync.html
+        aws s3 sync ./app/frontend s3://${{ secrets.WEBSITE_BUCKET_NAME }}
