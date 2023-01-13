@@ -42,5 +42,5 @@ jobs:
         aws lambda update-function-code --function-name $REPOSITORY --image-uri $REGISTRY/$REPOSITORY:$IMAGE_TAG 2>&1 > /dev/null
       
     - name: Upload app files to S3 bucket
-      working-diretory: app/frontend
+      working-directory: app/frontend
       run: aws s3 sync . s3://${{ secrets.WEBSITE_BUCKET_NAME }}
