@@ -3,7 +3,10 @@ name: Build, tag, push, deploy, and upload
 on:
   push:
     branches:
-    - main
+      - main
+    paths:
+      - '.github/workflows/**'
+      - 'app/**'
 
 jobs:
   deploy:
@@ -32,8 +35,12 @@ jobs:
         REGISTRY: ${{ steps.login-ecr.outputs.registry }}
         REPOSITORY: ${{ github.event.repository.name }}
         IMAGE_TAG: latest
+      working-directory: app/backend
       run: |
         docker build -t $REGISTRY/$REPOSITORY:$IMAGE_TAG .
         docker push $REGISTRY/$REPOSITORY:$IMAGE_TAG
         aws lambda update-function-code --function-name $REPOSITORY --image-uri $REGISTRY/$REPOSITORY:$IMAGE_TAG 2>&1 > /dev/null
-        aws s3 sync ./app/frontend s3://${{ secrets.WEBSITE_BUCKET_NAME }}
+      
+      - name: Upload app files to S3 bucket
+        working-diretory: app/frontend
+        run: aws s3 sync . s3://${{ secrets.WEBSITE_BUCKET_NAME }}
