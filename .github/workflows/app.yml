@@ -1,4 +1,4 @@
-name: Build, tag, push, deploy, and upload
+name: Build, tag, push, and deploy Docker image
 
 on:
   push:
@@ -10,7 +10,7 @@ on:
 
 jobs:
   deploy:
-    name: Build, tag, push, deploy, and upload
+    name: Build, tag, push, and deploy Docker image
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
@@ -35,12 +35,8 @@ jobs:
         REGISTRY: ${{ steps.login-ecr.outputs.registry }}
         REPOSITORY: ${{ github.event.repository.name }}
         IMAGE_TAG: latest
-      working-directory: app/backend
+      working-directory: app
       run: |
         docker build -t $REGISTRY/$REPOSITORY:$IMAGE_TAG .
         docker push $REGISTRY/$REPOSITORY:$IMAGE_TAG
         aws lambda update-function-code --function-name $REPOSITORY --image-uri $REGISTRY/$REPOSITORY:$IMAGE_TAG 2>&1 > /dev/null
-      
-    - name: Upload app files to S3 bucket
-      working-directory: app/frontend
-      run: aws s3 sync . s3://${{ secrets.WEBSITE_BUCKET_NAME }}
