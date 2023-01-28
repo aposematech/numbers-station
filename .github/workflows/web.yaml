@@ -13,12 +13,12 @@ jobs:
     name: Upload web files to S3 bucket
     runs-on: ubuntu-latest
     steps:
+    # https://github.com/marketplace/actions/checkout
     - name: Checkout
-      # https://github.com/marketplace/actions/checkout
       uses: actions/checkout@v3
 
+    # https://github.com/marketplace/actions/configure-aws-credentials-action-for-github-actions
     - name: Configure AWS credentials
-      # https://github.com/marketplace/actions/configure-aws-credentials-action-for-github-actions
       uses: aws-actions/configure-aws-credentials@v1-node16
       with:
         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
