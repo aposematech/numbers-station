@@ -58,7 +58,7 @@ def handler(event, context):
     # ping heartbeat monitor
     requests.get(os.environ['HEARTBEAT_MONITOR_URL'])
     # return key only
-    return { 
+    return {
         "statusCode": 200,
         "headers": {
             "Content-Type": "application/json"
