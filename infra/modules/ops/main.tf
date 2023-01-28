@@ -6,6 +6,8 @@ terraform {
       version = "~> 0.3.15"
     }
   }
+
+  required_version = "~> 1.3.7"
 }
 
 # https://registry.terraform.io/providers/BetterStackHQ/better-uptime/latest/docs/resources/betteruptime_heartbeat
