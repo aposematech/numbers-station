@@ -102,6 +102,8 @@ module "mq" {
 module "web" {
   source                 = "./modules/web"
   registered_domain_name = var.registered_domain_name
+  subdomain_name         = var.subdomain_name
+  default_page           = var.default_page
 }
 
 module "ops" {

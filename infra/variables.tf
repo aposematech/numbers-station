@@ -40,6 +40,16 @@ variable "registered_domain_name" {
   type        = string
 }
 
+variable "subdomain_name" {
+  description = "Subdomain Name"
+  type        = string
+}
+
+variable "default_page" {
+  description = "Static Website Default Page"
+  type        = string
+}
+
 variable "cron" {
   description = "Cron Expression"
   type        = string
