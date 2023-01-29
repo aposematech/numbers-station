@@ -38,11 +38,6 @@ variable "website_bucket_arn" {
   type        = string
 }
 
-variable "bucket_folder_name" {
-  description = "S3 Bucket Folder Name"
-  type        = string
-}
-
 variable "topic_arn" {
   description = "SNS Topic ARN"
   type        = string

@@ -72,7 +72,7 @@ def handler(event, context):
         s3_client.upload_fileobj(
             f,
             os.environ["WEBSITE_BUCKET_NAME"],
-            os.environ["BUCKET_FOLDER_NAME"] + "/" + cipher_text_qr_code_filename,
+            cipher_text_qr_code_filename,
         )
     # ping heartbeat monitor
     requests.get(os.environ["HEARTBEAT_MONITOR_URL"])

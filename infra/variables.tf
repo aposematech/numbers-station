@@ -8,11 +8,6 @@ variable "git_repo_visibility" {
   type        = string
 }
 
-variable "git_repo_homepage_url" {
-  description = "GitHub Repo Homepage URL"
-  type        = string
-}
-
 variable "aws_region" {
   description = "AWS Region"
   type        = string

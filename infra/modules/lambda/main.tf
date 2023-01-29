@@ -110,7 +110,6 @@ resource "aws_lambda_function" "lambda_function" {
     variables = {
       SECRET_TRANSMISSION_NAME = var.secret_transmission_name,
       WEBSITE_BUCKET_NAME      = var.website_bucket_name,
-      BUCKET_FOLDER_NAME       = var.bucket_folder_name,
       HEARTBEAT_MONITOR_URL    = var.heartbeat_monitor_url,
     }
   }
