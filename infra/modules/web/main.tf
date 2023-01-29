@@ -15,11 +15,6 @@ data "aws_route53_zone" "zone" {
   name = var.registered_domain_name
 }
 
-# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/s3_bucket
-data "aws_s3_bucket" "website_bucket" {
-  bucket = var.registered_domain_name
-}
-
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket
 resource "aws_s3_bucket" "website_bucket" {
   bucket = "${var.subdomain_name}.${var.registered_domain_name}"

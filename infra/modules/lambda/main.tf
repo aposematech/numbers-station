@@ -48,7 +48,7 @@ data "aws_iam_policy_document" "lambda_role_permissions_policy_document" {
       "s3:PutObjectAcl",
     ]
     resources = [
-      "${var.website_bucket_arn}/${var.bucket_folder_name}/*",
+      "${var.website_bucket_arn}/*",
     ]
   }
   statement {

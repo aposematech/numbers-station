@@ -9,11 +9,11 @@ output "hosted_zone_id" {
 }
 
 output "website_bucket_name" {
-  value       = data.aws_s3_bucket.website_bucket.id
+  value       = aws_s3_bucket.website_bucket.id
   description = "S3 Website Bucket Name"
 }
 
 output "website_bucket_arn" {
-  value       = data.aws_s3_bucket.website_bucket.arn
+  value       = aws_s3_bucket.website_bucket.arn
   description = "S3 Website Bucket ARN"
 }
